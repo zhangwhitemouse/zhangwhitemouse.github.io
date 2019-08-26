@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 生活 | white mouse的博客</title>
+  <title>自我介绍 | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/categories/生活/index.html">
+  <meta name="description" content="很多人觉得博客搭建很高大上，其实并不是这样的啦。我觉得只要你会用电脑，你就可以搭建属于自己的博客，下 面跟着我一起搭建自己的博客吧。">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自我介绍">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/博客解密/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="很多人觉得博客搭建很高大上，其实并不是这样的啦。我觉得只要你会用电脑，你就可以搭建属于自己的博客，下 面跟着我一起搭建自己的博客吧。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-26T05:10:30.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="自我介绍">
+<meta name="twitter:description" content="很多人觉得博客搭建很高大上，其实并不是这样的啦。我觉得只要你会用电脑，你就可以搭建属于自己的博客，下 面跟着我一起搭建自己的博客吧。">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,36 +147,99 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-博客解密" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      自我介绍
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/26/博客解密/" class="archive-article-date">
+
+        
+        <a href="/2019/08/26/博客解密/" class="archive-article-date">
   	<time datetime="2019-08-26T05:05:23.919Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/26/博客解密/">自我介绍</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>很多人觉得博客搭建很高大上，其实并不是这样的啦。我觉得只要你会用电脑，你就可以搭建属于自己的博客，下</p>
+<p>面跟着我一起搭建自己的博客吧。</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>​    依赖：Nodejs</p>
+<p>​    框架：Hexo</p>
+<p>​    由于大部分人都在使用Windows系统，下面我从Windows系统的角度来进行搭建</p>
+<h5 id="Nodejs的安装"><a href="#Nodejs的安装" class="headerlink" title="Nodejs的安装"></a>Nodejs的安装</h5><p>​    从<a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a>处下载LTS版，然后一路默认安装，就可以了（新版本的nodejs默认安装npm，默</p>
+<p>认将nodejs的路径添加到了环境变量里）。打开Windows命令行，使用node -v / npm -v 查看Nodejs和npm的版</p>
+<p>本。</p>
+<p>​    安装好后的nodejs在C:\Program Files\nodejs处，这是我们安装hexo框架的基础。</p>
+<h4 id="正式安装"><a href="#正式安装" class="headerlink" title="正式安装"></a>正式安装</h4><h5 id="下载Hexo框架到本地"><a href="#下载Hexo框架到本地" class="headerlink" title="下载Hexo框架到本地"></a>下载Hexo框架到本地</h5><p>​    由于npm的镜像源在国外，下载速度较慢，所以将镜像源指向淘宝的镜像源</p>
+<p>​    利用npm安装cnpm     npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>​    利用cnpm安装hexo    cnpm install -g hexo-cli</p>
+<p>​    这就安装完成啦！！！    可以通过hexo -v 来验证一下</p>
+<h5 id="生成第一个文档"><a href="#生成第一个文档" class="headerlink" title="生成第一个文档"></a>生成第一个文档</h5><p>​    1 首先在本地新建一个目录    mkdir blog    之后所有有关博客的内容都放在这个目录下（出了问题直接删了重</p>
+<p>​           来就好了）</p>
+<p>​    2 然后在命令行 cd 到博客目录下，执行 hexo init    等待一段时间后就可以完成</p>
+<p>​    3 然后执行    hexo new “新建文档的名字”    然后就会出现新文档的路径，然后cd 到文档目录下，对</p>
+<p>​     文档进行编辑（Linux下可以直接用Vim编辑，Windows下需要使用外部软件进行编辑），保存退出就完成了</p>
+<p>​    4 依次执行如下命令    hexo clean         hexo generate  == hexo g          hexo server  == hexo s</p>
+<p>​    5 执行完上述3个命令会出现url链接，一般是localhost:4000，直接在浏览器上输入就可以直接看到自己发布</p>
+<p>​       的文档了</p>
+<h5 id="部署到Github端"><a href="#部署到Github端" class="headerlink" title="部署到Github端"></a>部署到Github端</h5><p>​    前题：你得有一个Github账号，知道怎么建库。然后还得安装一个github插件</p>
+<p>​        执行：cnpm  install hexo-deployer-git –save</p>
+<p>​    1 在你的Github上新建一个仓库，名称==必须==是你的Github名+.github.io</p>
+<p>​       例如：你的Github名是wang，仓库名必须是    wang.github.io</p>
+<p>​    2 创建完成后，拿到你新建仓库得链接（url）</p>
+<p>​    3 回到Windows命令行，进入blog主目录</p>
+<p>​    4 修改配置文件    打开_config.yml（Windows需要外部软件编辑），修改如下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/deployment.html</span></span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wang.github.io.git(这个就是你自己</span><br><span class="line">  		的仓库链接)</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>​     编辑完成后保存。</p>
+<p>​    5 顺序执行如下指令    hexo clean    hexo generate    hexo deploy == hexo d</p>
+<p>​    6 然后你就可以通过在浏览器输入 wang.github.io进行访问</p>
+<h5 id="更改blog主题"><a href="#更改blog主题" class="headerlink" title="更改blog主题"></a>更改blog主题</h5><p>​    可以对blog 的主题进行定制（网上有好多的主题），我这里使用的是yilia</p>
+<p>​    1 首先拿到主题的github链接，比如 <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a></p>
+<p>​    2 然后执行     git clone  <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia</p>
+<p>​    3 修改配置文件_config.yml    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">themes: yilia		注意冒号后面有一个空格</span><br><span class="line">保存，退出即可</span><br></pre></td></tr></table></figure>
+
+<p>​    4 依次执行如下命令    hexo clean    hexo generate    hexo deploy</p>
+<p>​    5 此时你就可以在你自己的博客上看到效果了</p>
+<p>【至此简单的博客搭建已经结束，还看什么呢，赶快去动手搭建。后期也会更新一些关于博客的issues】</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,7 +251,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -199,66 +264,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/26/博客解密/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/自我介绍/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:37:23.434Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/25/自我介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">自我介绍</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/自我介绍/">自我介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -281,10 +384,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
