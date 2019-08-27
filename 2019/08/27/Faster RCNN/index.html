@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>white mouse的博客</title>
+  <title>Faster-RCNN论文翻译 | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Faster RCNN -利用候选区域实现的实时目标检测摘要​    最先进的目标检测网络依赖于候选区域算法来推测目标的位置。比如SPPNet和Fast RCNN 都减少了这些检测 网络的运行时间，并且都认为候选区域的计算量是一个瓶颈。在这篇文章的工作中，我们介绍了一个候选区域网络 （RPN），它与检测网络共享整张图片的卷积特征，因此使得候选区域几乎无花费。候选区域网络是一个完全卷积 网络，可以在">
+<meta name="keywords" content="CV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Faster-RCNN论文翻译">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/Faster RCNN/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="Faster RCNN -利用候选区域实现的实时目标检测摘要​    最先进的目标检测网络依赖于候选区域算法来推测目标的位置。比如SPPNet和Fast RCNN 都减少了这些检测 网络的运行时间，并且都认为候选区域的计算量是一个瓶颈。在这篇文章的工作中，我们介绍了一个候选区域网络 （RPN），它与检测网络共享整张图片的卷积特征，因此使得候选区域几乎无花费。候选区域网络是一个完全卷积 网络，可以在">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T08:49:21.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="Faster-RCNN论文翻译">
+<meta name="twitter:description" content="Faster RCNN -利用候选区域实现的实时目标检测摘要​    最先进的目标检测网络依赖于候选区域算法来推测目标的位置。比如SPPNet和Fast RCNN 都减少了这些检测 网络的运行时间，并且都认为候选区域的计算量是一个瓶颈。在这篇文章的工作中，我们介绍了一个候选区域网络 （RPN），它与检测网络共享整张图片的卷积特征，因此使得候选区域几乎无花费。候选区域网络是一个完全卷积 网络，可以在">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,16 +147,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Faster RCNN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Faster RCNN" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/Faster RCNN/">Faster-RCNN论文翻译</a>
+    <h1 class="article-title" itemprop="name">
+      Faster-RCNN论文翻译
     </h1>
   
 
@@ -174,11 +174,120 @@
 <p>案，然后这个候选区域被Fast RCNN用来目标检测。然后通过简单的交替优化，使得候选区域网络和Fast RCNN在</p>
 <p>训练的时候能够共享卷积特征。 对于VGG16模型，我们的系统在一个GPU上达到5帧每秒，并且获得PASCALVOC</p>
 <p>2007和2012最佳准确率（每张图片使用300个候选区域）。</p>
-        
-          <a class="article-more-a" href="/2019/08/27/Faster RCNN/#more">more >></a>
-        
+<a id="more"></a>
+
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>​    最近目标检测领域的进步是由候选区域方法和基于区域的卷积神经网络的成功驱动的。尽管基于区域的卷积</p>
+<p>神经网络计算量大（最初的版本【6】），然后【5，7】通过共享区域的卷积大大减少了计算花费，最新的改进，</p>
+<p>通过忽略花费在候选区域的时间，使得Fast RCNN 使用深度网络达到了实时的标准。现在，候选区域在检测系统</p>
+<p>里是计算的瓶颈。</p>
+<p>​    典型的候选区域方法依赖便宜的特征和经济推理方案。一个最流行的方法是选择性搜素（SS），贪婪的融合</p>
+<p>由低层特征设计的超像素。然而，当和有效的检测网络相比，选择性搜索的方法会慢一个量级，在CPU上应用是2</p>
+<p>秒一张图片。【24】候选区域的质量和速度之间做了一个最好的平衡，能够达到0.2秒一张图片。尽管这样，区域</p>
+<p>提案在检测网络里依然消耗了大量的运行时间。</p>
+<p>​    值得注意的是，Fast RCNN 利用GPU，而在研究中使用的候选区域方法是在CPU上实现的，这样比较运行时</p>
+<p>间是不公平的。一个明显的方法去加速区域计算是用GPU重新实现它。这可能是有效的工程方法，但是重新应用</p>
+<p>忽略了下游检测网络，并且因此错过了共享计算的选择。</p>
+<p>​    在这篇文章中，我们做出一个算法的改变，即通过深度网络来计算候选区域，这种区域计算几乎在检测网</p>
+<p>络中无花费，更加的优雅更加的有效。　在最后，我们介绍一个新型候选区域网络，它能够与最佳性能的目标检测</p>
+<p>网络共享卷积层。通过在测试的时候共享卷积层，计算候选区域的花费非常小。</p>
+<p>​    我们发现，像Fast－RCNN基于候选区域的检测器的卷积层，也能够用来产生候选区域。在卷积的最顶层，我</p>
+<p>们增加两个额外的卷积层来构建候选区域网络：其中一个卷积层将卷积图的位置信息编码成一个小的特征向量</p>
+<p>（256-d），另一个卷积层，在每个卷积图的位置输出目标的得分和k个候选区域的回归界限，这是相对于各个位</p>
+<p>置不同的长宽比和纵横比来说的。（k = 9）</p>
+<p>​    我们的候选区域网络是完全卷积网络，能够端到端的训练，专门为产生目标候选而设计。为了统一候选区</p>
+<p>域网络和Fast RCNN检测网络，我们提出一个简单的训练机制—　在保持候选区域固定的情况下，轮流微调候选区</p>
+<p>域方法和目标检测方法。这个机制能够迅速收敛并且能够生成在两个任务之间共享卷积特征的统一网络。</p>
+<p>​    我们在PASCAL VOC的检测基准上评估我们的方法，这个基准上，使用候选区域方法的Fast RCNN 的准确率</p>
+<p>要好于使用SS方法的Fast RCNN。与此同时，我们的方法在测试时几乎摆脱了计算负担，候选区域生成的运行时</p>
+<p>间只要10毫秒。在使用深度模型【19】，我们的检测方法在GPU上依然有每秒5帧的效果，所以说在速度和准确性</p>
+<p>上这个系统是有实际意义的。</p>
+<h4 id="候选区域网络"><a href="#候选区域网络" class="headerlink" title="候选区域网络"></a>候选区域网络</h4><p>​    候选区域网络是使用任意大小的图片作为输入，输出矩形目标区域的集合，每个矩形框都带有目标的得分。</p>
+<p>我们通过完全卷积网络模拟这个过程，这个我们将会在这个章节进行描述。因为我们最终的目标是和Fast RCNN </p>
+<p>共享计算，我们假设这两个网络普通的卷积层集合。在我们的实验中，我们探讨了共享5层卷积层和共享13层的模</p>
+<p>型。</p>
+<p>​    为了产生候选区域，我们在最后共享的卷积特征图输出上滑动一个小网络。这个网络与输入特征图的n*n空间</p>
+<p>窗口进行连接。每个滑动窗口映射成低维向量(256-d、512-d)。这个向量被喂到两个完全卷积层—候选框回归层和</p>
+<p>候选框分类层。在这篇文章中n =3，注意有效感受野在输入图片上是非常大的（在ZF中是171个像素，在VGG中</p>
+<p>是228个像素）。这个迷你网络在图１的位置表示了。注意因为迷你网络操作以滑动窗口的方式运行，全连接层</p>
+<p>以横跨所有空间位置的方式共享。这种架构自然的用ｎ＊ｎ卷积层实现，然后是两个１＊１的卷积层。RELU被应</p>
+<p>用在ｎ＊ｎ卷积层的输出上。</p>
+<h5 id="转换不变的锚点"><a href="#转换不变的锚点" class="headerlink" title="转换不变的锚点"></a>转换不变的锚点</h5><p>​    在每个滑动窗口的位置上，我们同时预测ｋ个候选区域，所以回归层有４ｋ个输出—编码了Ｋ个候选框的坐</p>
+<p>标，分类层输出２K个分数来评估在每个候选区域有无目标。K个候选框相对于K个参考框参数化，叫锚点。每个锚</p>
+<p>点在滑动窗口的中心，并且和规模与比率有关。我们使用３种大小，３种比率，在每个滑动位置有９个锚框。因为</p>
+<p>卷积特征图的大小是W＊H，所以一共有W＊H＊K个锚框。我们的方法一个重要的属性是转换不变，在锚框方面和</p>
+<p>相对于锚点计算候选框的函数来说都是的。</p>
+<p>​    做一个对比，多框方法【20】使用K－means来产生800个锚框，并且是可变的。如果在一张图中转换一个</p>
+<p>目标，候选区域应该转换，并且同样的函数应该能够预测其他位置的候选区域。与此同时，因为多框方法的锚框是</p>
+<p>可变的，它需要（4+1）*800维的输出层，而我们的方法需要（4+2）*9维的输出，我们的候选层少了一个数量级</p>
+<p>的参数，因此在小数据集上的过拟合的风险更小。</p>
+<h5 id="学习候选区域的损失函数"><a href="#学习候选区域的损失函数" class="headerlink" title="学习候选区域的损失函数"></a>学习候选区域的损失函数</h5><p>​    为了训练候选区域网络，我们指定一个二分类的标签（有无目标）给每个锚框。我们分派正标签给两类锚、</p>
+<p>框：（1）与置信框有最高的重合度（2）这个锚框与任何置信框的IOU值超过了０.７。注意一个置信框可以将多</p>
+<p>个锚框指定成正样本。我们为非正样本指定为负样本，如果锚框与所有置信框的IOU的值小于0.3。那些既不是正</p>
+<p>样本也不是负样本的锚框对训练无影响。</p>
+<p>​    有了这些定义，我们在Fast RCNN的多任务丢失之后最小化目标函数。我们对一张图片的损失函数定义如下：</p>
+<p>​    $L\left(\left{p_{i}\right},\left{t_{i}\right}\right)=\frac{1}{N_{c l s}} \sum_{i} L_{c l s}\left(p_{i}, p_{i}^{<em>}\right)+\lambda \frac{1}{N_{\text {reg}}} \sum_{i} p_{i}^{</em>} L_{\text {reg}}\left(t_{i}, t_{i}^{*}\right)$</p>
+<p>在公式中$\dot{i}$是小批量的锚框索引，$p_{i}$是预测$\dot{i}$个锚框内含有目标的可能性。如果锚框是正样本的话，置信样本的标</p>
+<p>签$p_{i}^{<em>}$值为1，如果锚框是负样本的话值为0。$t_{i}$是关于预测边界框4个参数化坐标的向量表示，$t_{i}^{</em>}$是与置信框相关的</p>
+<p>正样本锚框。分类损失$L_{c l s}$是记录两类损失（有目标、无目标）。对于回归损失，我们使用</p>
+<p>$L_{r e g}\left(t_{i}, t_{i}^{<em>}\right)=R\left(t_{i}-t_{i}^{</em>}\right)$来表示，其中R是【5】中定义的强大的损失函数，公式$p_{i}^{*} L_{r e g}$表示回归损失，它只能</p>
+<p>被正样本的锚框激活，负样本是不能激活的。cls和reg 的输出分别由$\left{p_{i}\right}$和$\left{t_{i}\right}$组成。这两个术语用$N_{c l s}$和$N_{r e g}$</p>
+<p>来标准化，平衡的权重为$\lambda$。</p>
+<p>​    对于回归，我们的4个坐标采用了参数化的形式：</p>
+<p>$\begin{aligned} t_{\mathrm{x}}=\left(x-x_{\mathrm{a}}\right) / w_{\mathrm{a}}, &amp; t_{\mathrm{y}}=\left(y-y_{\mathrm{a}}\right) / h_{\mathrm{a}}, \quad t_{\mathrm{w}}=\log \left(w / w_{\mathrm{a}}\right), \quad t_{\mathrm{h}}=\log \left(h / h_{\mathrm{a}}\right) \ t_{\mathrm{x}}^{<em>}=\left(x^{</em>}-x_{\mathrm{a}}\right) / w_{\mathrm{a}}, &amp; t_{\mathrm{y}}^{<em>}=\left(y^{</em>}-y_{\mathrm{a}}\right) / h_{\mathrm{a}}, \quad t_{\mathrm{w}}^{<em>}=\log \left(w^{</em>} / w_{\mathrm{a}}\right), \quad t_{\mathrm{h}}^{<em>}=\log \left(h^{</em>} / h_{\mathrm{a}}\right) \end{aligned}$</p>
+<p>$x, y, w$ $h$表示回归框的两个中心坐标，宽度，高度，变量$x, x_{\mathrm{a}}$，$x^{*}$分别表示预测框，锚框，置信框。这可以被认</p>
+<p>为是从锚框到置信框的边界框回归。</p>
+<p>​    尽管如此，我们获得边界框回归的方法也不同于之前基于特征图的方法【5】，在【5】中，边界框损失从任</p>
+<p>意大小区域得到的特征池化进行操作，并且回归的权重被所有候选区域共享。在我们的方法中，在特征图中用来计</p>
+<p>算回归的都是同样的大小。考虑到不同的大小，学习了一组K个边界框回归量。每个回归量负责一个尺寸和一个比</p>
+<p>例，并且K个回归量不共享权重。因此，它依然能够预测不同大小的框，即使特征是固定的大小。</p>
+<h5 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h5><p>​    候选区域网络能够自然的作为完全卷积网络被应用，他能够通过后向传播和随机梯度下降来端到端的进行训</p>
+<p>练，我们遵循以图像为中心的采样策略来训练这个网络。每个来自单个图像的小批量都包含许多正样本锚框和负样</p>
+<p>本锚框，它能够优化所有锚框的损失函数，但是因为负样本占主导地位，可能会导致偏差。相比之下，我们在一张</p>
+<p>图中随机采样256个锚框（正样本与负样本1：1）来计算小批量的损失函数。如果在一张图中正样本少于128个，</p>
+<p>我们就使用负样本来填充。</p>
+<p>​    我们使用均值为0，标准差为0.01的高斯分布作为初始权重来随机初始化所有新层。其它的所有层由</p>
+<p>ImageNet分类模型来初始化，我们调整ZF网络的所有层，并将Conv3_1和更高层使用VGG来节省内存。我们前</p>
+<p>60000个批量采用的学习率为 0.001，后面的20000个批量采用0.00001。我们的动量为0.9，权重衰减值为0.0005</p>
+<p>我们使用Caffe来实现。</p>
+<h5 id="目标检测和候选区域网络共享卷积层"><a href="#目标检测和候选区域网络共享卷积层" class="headerlink" title="目标检测和候选区域网络共享卷积层"></a>目标检测和候选区域网络共享卷积层</h5><p>​    到现在为止，我们描述了为了生成候选区域是怎样训练网络的，并没有考虑要利用这些候选区域的区域目</p>
+<p>标检测网络。对于检测网络，我们采用了Fast RCNN，现在描述用于候选区域和Fast RCNN共享的卷积层的算法。</p>
+<p>​    候选区域网路和Fast RCNN都独立进行训练，所以以不同的方法来修改他们的卷积层。我们依次需要一项技术</p>
+<p>能够共享两个网络的卷积层，而不是学习两个分开的网络。注意这不是简单的定义一个包含候选区域网络和目标检</p>
+<p>测网络的单独网络，而是通过后向传播来联合优化。因为Fast RCNN的训练依赖固定的目标区域，而且没有清晰的</p>
+<p>先验定义，如果在FastRCNN在学习的同时改变候选机制将会快速收敛。因此联合优化是一个有趣的工作，我们通</p>
+<p>过交替优化开发了一个４步训练算法来学习共享特征。</p>
+<p>​    第一步，我们像之前描述的那样训练区域候选网络。这个网络通过ImageNet预训练模型来初始化，然后通过</p>
+<p>端到端的微调来适应区域候选任务。第二步，我们使用使用区域候选网络生成的候选区域来训练独立的检测网络</p>
+<p>FastRCNN。这个检测网络也由ImageNet预训练模型来初始化。在这个时候，这两个网络还没有共享卷积层。第</p>
+<p>三步，我们使用检测网络来初始化区域候选网络的训练，但是我们固定了共享卷积层，并且只微调了区域候选网络</p>
+<p>独有的卷积层。现在连个网络共享了卷积层。最后，保持共享卷积层的固定，我们微调FastRCNN的全连接层。因</p>
+<p>此，两个网络共享了同样的卷积层并且形成了一个统一的网络。</p>
+<p>​    </p>
+<p>～～～～后面就不翻了哈，都是些实验的操作，需要直接看原文就可以了。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -209,16 +318,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/27/Faster RCNN/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/27/Faster RCNN/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/27/Vim常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vim常用命令</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -238,345 +406,14 @@
 
 
 
-
   
-    <article id="post-Vim常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/Vim常用命令/">Vim常用命令</a>
-    </h1>
   
 
-        
-        <a href="/2019/08/27/Vim常用命令/" class="archive-article-date">
-  	<time datetime="2019-08-27T05:30:17.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要就是一些自己经常用得到的，并没有包含所有的命令</p>
-        
-          <a class="article-more-a" href="/2019/08/27/Vim常用命令/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/27/Vim常用命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/26/博客解密/">博客解密</a>
-    </h1>
   
 
-        
-        <a href="/2019/08/26/博客解密/" class="archive-article-date">
-  	<time datetime="2019-08-26T05:05:23.919Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很多人觉得博客搭建很高大上，其实并不是这样的啦。我觉得只要你会用电脑，你就可以搭建属于自己的博客，下</p>
-<p>面跟着我一起搭建自己的博客吧。</p>
-        
-          <a class="article-more-a" href="/2019/08/26/博客解密/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/26/博客解密/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-自我介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/自我介绍/">自我介绍</a>
-    </h1>
   
 
-        
-        <a href="/2019/08/25/自我介绍/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:37:23.434Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="自我吹捧的时间"><a href="#自我吹捧的时间" class="headerlink" title="自我吹捧的时间"></a>自我吹捧的时间</h5><p>​    本人是魔都双非渣硕一名，漂泊在人才济济的魔都。时常拉着三五好友谈天说地，指点四方，酒醒后又各自搬砖。 创建这个blog的目的是记录自己的学习过程，也方便自己以后回头看。可以直接说成是野生程序员的成长之路。</p>
-        
-          <a class="article-more-a" href="/2019/08/25/自我介绍/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/自我介绍/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-25T07:43:55.454Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -599,8 +436,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
