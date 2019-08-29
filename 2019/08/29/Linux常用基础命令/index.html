@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 工具 | white mouse的博客</title>
+  <title>Linux常用命令 | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/tags/工具/index.html">
+  <meta name="description" content="记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉 现在的命令之中，awk命令可能是最复杂的了。 （我比较菜，大佬直接忽略哈）">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/Linux常用基础命令/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉 现在的命令之中，awk命令可能是最复杂的了。 （我比较菜，大佬直接忽略哈）">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-29T12:27:18.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉 现在的命令之中，awk命令可能是最复杂的了。 （我比较菜，大佬直接忽略哈）">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,36 +147,160 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Linux常用基础命令" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Linux常用命令
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/29/Linux常用基础命令/" class="archive-article-date">
+
+        
+        <a href="/2019/08/29/Linux常用基础命令/" class="archive-article-date">
   	<time datetime="2019-08-29T12:27:56.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-29</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/29/Linux常用基础命令/">Linux常用命令</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉</p>
+<p>现在的命令之中，awk命令可能是最复杂的了。</p>
+<p>（我比较菜，大佬直接忽略哈）</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h5 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h5><p>cd ..        返回上一级目录</p>
+<p>cd ~      返回home目录</p>
+<p>cd /     返回根目录</p>
+<h5 id="创建文件夹和删除文件夹命令"><a href="#创建文件夹和删除文件夹命令" class="headerlink" title="创建文件夹和删除文件夹命令"></a>创建文件夹和删除文件夹命令</h5><p>mkdir  folder     创建一个名为folder 的文件夹</p>
+<p>mkdir  folder/file3     在folder文件夹下创建一个file3文件</p>
+<p>rmdir  folder        删除folder文件夹 (文件夹为空的时候才行)</p>
+<p>rmdir  -r  folder     以递归的方式一个一个的删除文件夹folder的内容</p>
+<p>touch file           创建一个file文件</p>
+<p>rm  file1          删除file1文件</p>
+<h5 id="文件复制与传送命令"><a href="#文件复制与传送命令" class="headerlink" title="文件复制与传送命令"></a>文件复制与传送命令</h5><p>cp  file1  file2   把file1复制给file2(file1会覆盖file2)</p>
+<p>cp  file1  folder/    把file1文件复制到folder文件夹下</p>
+<p>cp  -r   folder1   folder2   文件夹之间的复制</p>
+<p>scp  -r   要发送的文件     slave:接收文件的地址目录</p>
+<h5 id="剪切与重命名命令"><a href="#剪切与重命名命令" class="headerlink" title="剪切与重命名命令"></a>剪切与重命名命令</h5><p>mv  file1  folder/     将file1文件移动到folder文件夹下</p>
+<p>mv   file1   file1rename   将file1文件重命名为file1rename</p>
+<h5 id="文件浏览命令"><a href="#文件浏览命令" class="headerlink" title="文件浏览命令"></a>文件浏览命令</h5><p>ls    浏览文件夹下的所有文件</p>
+<p>ls  -l  浏览文件夹下的文件并显示文件信息</p>
+<p>ls  -a  列出所有文件包含隐藏文件</p>
+<p>cat   file     显示file文件内容</p>
+<p>cat  file1 &gt; file2  将file1中的文件拿出来放到file2中去</p>
+<p>wc :统计指定文件中的字节数、字数、行数</p>
+<p>​    wc -c file        统计file文件的字节数</p>
+<p>​         -l               行数</p>
+<p>​         -w        字数</p>
+<p>ls | wc -l            组合命令：就是计算某个文件夹下的文件数</p>
+<h5 id="进程和网络的监控"><a href="#进程和网络的监控" class="headerlink" title="进程和网络的监控"></a>进程和网络的监控</h5><p>netstat  -an         显示网络信息</p>
+<p>netstat  -anp       显示网络信息(包含进程号)</p>
+<p>ps  -aux        显示详细的进程信息</p>
+<p>top            动态监控进程</p>
+<p>top  -d  10      系统每10秒刷新一次</p>
+<p>kill  5255       表示杀死5255号进程</p>
+<p>kill   -9   5255   对于一些难以杀死的进程用  -9  参数</p>
+<h5 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h5><p>grep   -n   ‘查找的内容’   aaa.java    在aaa文件中查找关键字</p>
+<p>find  /  -name  aaa.java    从根目录开始查找名为aaa.java的文件</p>
+<p>find  / -cmin  -10    从根目录开始查找10分钟内更改过的文件或目录</p>
+<p>find  /home  -size  +10k   查找home目录下大于10k的文件</p>
+<p>find  .   列出当前目录及子目录下的所有文件和文件夹</p>
+<p>find  .  -name    you.txt     在当前目录及子目录下查找名为you.txt的文件</p>
+<h5 id="查看大文件时的分页显示"><a href="#查看大文件时的分页显示" class="headerlink" title="查看大文件时的分页显示"></a>查看大文件时的分页显示</h5><h4 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h4><p>​    more 从前向后读取文件、一启动就加载了整个文件</p>
+<p>​    more  +3 text.log     从第三行开始显示</p>
+<p>​    more  -3  text.log     每屏显示3行</p>
+<p>​    more   +/liu text.log  在text.log文件中查找liu字符串，并从该处的前两行开始输出</p>
+<p>​    也可以和管道命令进行结合        cat  text.log  |  more  -5</p>
+<h5 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h5><p>​    less与more命令相似，但是less可以随意浏览文件，而more仅能向前移动，不能向后移动，而且less在查看                                          之前不会加载整个文件</p>
+<p>​    退出less模式输入q</p>
+<h5 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h5><p>​    head用来将文档的开头致标准输出中</p>
+<p>​    head 默认打印前10行</p>
+<p>​    head  -n  显示前n行</p>
+<h5 id="awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理"><a href="#awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理" class="headerlink" title="awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理"></a>awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理</h5><p>​    awk脚本：注意两个关键词BEGIN   END</p>
+<p>​        BEGIN{放执行前的语句}</p>
+<p>​        END{放处理完所有行之后要执行的语句}</p>
+<p>​        {放处理每一行时要执行的语句}</p>
+<p>​    cat log.txt | awk  ‘BEGIN{a=0}{a + =$2}END{print a }’    </p>
+<p>​        初始值是 a = 0</p>
+<p>​        执行文本每一行时，将每一行的第二列相加</p>
+<p>​        所有行执行结束之后，将a 打印出来</p>
+<p>​    awk  -F   ‘:’  ‘{print  $1}’    awk 以：作为域的分隔符        </p>
+<p>​        $0代表所有域    $1代表第一域</p>
+<h5 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h5><p>​    通常在标准输出或者文件中显示一行文本或者字符串</p>
+<p>​    echo   [参数]    字符串        文本加引号时，将字符串原样输出</p>
+<p>​                            不加引号，将字符串各个单词输出，单词间用空格分隔</p>
+<p>​    echo  -n  字符串            表示不要在最后自动换行</p>
+<p>​    echo   -e   字符串            相当于转义，遇到一些字符要特别处理</p>
+<h5 id="其他一些常用命令"><a href="#其他一些常用命令" class="headerlink" title="其他一些常用命令"></a>其他一些常用命令</h5><p>pwd     返回当前所在路径</p>
+<p>su -  zhang      切换到用户zhang</p>
+<p>管道命令     |      把|前面的交给结果交给|后面的处理</p>
+<p>useradd    zhang    添加用户zhang</p>
+<p>passwd  zhang      给用户zhang添加密码</p>
+<p>userdel  zhang       删除用户zhang    </p>
+<p>userdel   -r   zhang   删除用户zhang及用户主目录</p>
+<p>man   grep     帮助命令</p>
+<p>^    在规则表达式中代表行的开头位置</p>
+<p>/    目录级别分隔符</p>
+<p>.    当前目录</p>
+<p>./a    当前目录下名为a的文件</p>
+<p>sudo 允许普通用户执行root的操作</p>
+<h5 id="yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"><a href="#yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系" class="headerlink" title="yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"></a>yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系</h5><p>​ yum [options][command] [package]</p>
+<p>​        opitons 有 -h(显示帮助)        -y（安装过程提示为yes）        -q（不显示安装过程）</p>
+<p>​        command  要进行的操作</p>
+<p>​        package     要安装的包</p>
+<p>​    例如  ： yum install  gcc</p>
+<p>rpm -pal | grep python     用rpm 命令查找文件</p>
+<p>rpm -qa | grep 包名    查找这个包</p>
+<p>rpm -e |grep 包名    删除这个包</p>
+<h5 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h5><p>​    是一个下载文件的工具。可以实现自动下载即wget可以在用户退出系统后在后台执行，直到任务完成</p>
+<p>​    wget非常稳定，可以在带宽很窄的情况下适应。如果是由于网络的原因下载失败，wget会不断尝试，直到整</p>
+<p>​    个文件下载完毕。</p>
+<p>​    wget  [参数]    [网址]</p>
+<p>​    一般参数项可以忽略</p>
+<h5 id="tee-命令"><a href="#tee-命令" class="headerlink" title="tee 命令"></a>tee 命令</h5><p>​    将数据重定向到文件</p>
+<p>​    tee -a file.txt        将数据重定向到file文件里</p>
+<p>​        -a 表示 数据重定向到文件时使用追加模式。</p>
+<h3 id="查询端口"><a href="#查询端口" class="headerlink" title="查询端口"></a>查询端口</h3><p>netstat -anp |grep 端口号</p>
+<hr>
+<p>持续更新。。。。。。</p>
+<h5 id="安装环境时常用的命令"><a href="#安装环境时常用的命令" class="headerlink" title="安装环境时常用的命令"></a>安装环境时常用的命令</h5><p>编辑环境变量            vim  ~/.bashrc    编辑用户home目录下的隐藏文件bashrc</p>
+<p>​                    ~代表用户的home目录    .在文件名头部代表一个隐藏文件</p>
+<p>刷新环境变量            source ~/.bashrc</p>
+<p>远程发送文件            scp -r         file                       slave：/usr/local……</p>
+<p>​                             要发送的文件    发送的目标地址</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,7 +312,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -199,66 +325,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/29/Linux常用基础命令/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/Vim常用命令/" class="archive-article-date">
-  	<time datetime="2019-08-27T05:30:17.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/29/Java-language/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java基本语法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/Vim常用命令/">Vim常用命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -281,9 +445,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
