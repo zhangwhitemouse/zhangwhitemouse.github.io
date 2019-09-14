@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="white mouse的博客">
 <meta property="og:description" content="记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉 现在的命令之中，awk命令可能是最复杂的了。 （我比较菜，大佬直接忽略哈）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-29T12:27:18.092Z">
+<meta property="og:updated_time" content="2019-09-14T12:15:14.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="记录了一些自己经常用的一些命令，都是一些特别基础的命令。又难度的命令，好像现在并没有涉及到，个人感觉 现在的命令之中，awk命令可能是最复杂的了。 （我比较菜，大佬直接忽略哈）">
@@ -172,54 +172,140 @@
 <p>（我比较菜，大佬直接忽略哈）</p>
 <a id="more"></a>
 
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h5 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h5><p>cd ..        返回上一级目录</p>
-<p>cd ~      返回home目录</p>
-<p>cd /     返回根目录</p>
-<h5 id="创建文件夹和删除文件夹命令"><a href="#创建文件夹和删除文件夹命令" class="headerlink" title="创建文件夹和删除文件夹命令"></a>创建文件夹和删除文件夹命令</h5><p>mkdir  folder     创建一个名为folder 的文件夹</p>
-<p>mkdir  folder/file3     在folder文件夹下创建一个file3文件</p>
-<p>rmdir  folder        删除folder文件夹 (文件夹为空的时候才行)</p>
-<p>rmdir  -r  folder     以递归的方式一个一个的删除文件夹folder的内容</p>
-<p>touch file           创建一个file文件</p>
-<p>rm  file1          删除file1文件</p>
-<h5 id="文件复制与传送命令"><a href="#文件复制与传送命令" class="headerlink" title="文件复制与传送命令"></a>文件复制与传送命令</h5><p>cp  file1  file2   把file1复制给file2(file1会覆盖file2)</p>
-<p>cp  file1  folder/    把file1文件复制到folder文件夹下</p>
-<p>cp  -r   folder1   folder2   文件夹之间的复制</p>
-<p>scp  -r   要发送的文件     slave:接收文件的地址目录</p>
-<h5 id="剪切与重命名命令"><a href="#剪切与重命名命令" class="headerlink" title="剪切与重命名命令"></a>剪切与重命名命令</h5><p>mv  file1  folder/     将file1文件移动到folder文件夹下</p>
-<p>mv   file1   file1rename   将file1文件重命名为file1rename</p>
-<h5 id="文件浏览命令"><a href="#文件浏览命令" class="headerlink" title="文件浏览命令"></a>文件浏览命令</h5><p>ls    浏览文件夹下的所有文件</p>
-<p>ls  -l  浏览文件夹下的文件并显示文件信息</p>
-<p>ls  -a  列出所有文件包含隐藏文件</p>
-<p>cat   file     显示file文件内容</p>
-<p>cat  file1 &gt; file2  将file1中的文件拿出来放到file2中去</p>
-<p>wc :统计指定文件中的字节数、字数、行数</p>
-<p>​    wc -c file        统计file文件的字节数</p>
-<p>​         -l               行数</p>
-<p>​         -w        字数</p>
-<p>ls | wc -l            组合命令：就是计算某个文件夹下的文件数</p>
-<h5 id="进程和网络的监控"><a href="#进程和网络的监控" class="headerlink" title="进程和网络的监控"></a>进程和网络的监控</h5><p>netstat  -an         显示网络信息</p>
-<p>netstat  -anp       显示网络信息(包含进程号)</p>
-<p>ps  -aux        显示详细的进程信息</p>
-<p>top            动态监控进程</p>
-<p>top  -d  10      系统每10秒刷新一次</p>
-<p>kill  5255       表示杀死5255号进程</p>
-<p>kill   -9   5255   对于一些难以杀死的进程用  -9  参数</p>
-<h5 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h5><p>grep   -n   ‘查找的内容’   aaa.java    在aaa文件中查找关键字</p>
-<p>find  /  -name  aaa.java    从根目录开始查找名为aaa.java的文件</p>
-<p>find  / -cmin  -10    从根目录开始查找10分钟内更改过的文件或目录</p>
-<p>find  /home  -size  +10k   查找home目录下大于10k的文件</p>
-<p>find  .   列出当前目录及子目录下的所有文件和文件夹</p>
-<p>find  .  -name    you.txt     在当前目录及子目录下查找名为you.txt的文件</p>
-<h5 id="查看大文件时的分页显示"><a href="#查看大文件时的分页显示" class="headerlink" title="查看大文件时的分页显示"></a>查看大文件时的分页显示</h5><h4 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h4><p>​    more 从前向后读取文件、一启动就加载了整个文件</p>
-<p>​    more  +3 text.log     从第三行开始显示</p>
-<p>​    more  -3  text.log     每屏显示3行</p>
-<p>​    more   +/liu text.log  在text.log文件中查找liu字符串，并从该处的前两行开始输出</p>
-<p>​    也可以和管道命令进行结合        cat  text.log  |  more  -5</p>
-<h5 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h5><p>​    less与more命令相似，但是less可以随意浏览文件，而more仅能向前移动，不能向后移动，而且less在查看                                          之前不会加载整个文件</p>
-<p>​    退出less模式输入q</p>
-<h5 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h5><p>​    head用来将文档的开头致标准输出中</p>
-<p>​    head 默认打印前10行</p>
-<p>​    head  -n  显示前n行</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li><p>反斜杠 \        强制换行</p>
+</li>
+<li><p>ctrl + u        清空至行首</p>
+</li>
+<li><p>ctrl + k         清空至行尾</p>
+</li>
+<li><p>ctrl + L         清屏</p>
+</li>
+<li><p>./            直接运行脚本</p>
+</li>
+</ul>
+<h5 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h5><ul>
+<li><p>cd ..        返回上一级目录</p>
+</li>
+<li><p>cd ~      返回home目录</p>
+</li>
+<li><p>cd /     返回根目录</p>
+</li>
+</ul>
+<h5 id="创建文件夹和删除文件夹命令"><a href="#创建文件夹和删除文件夹命令" class="headerlink" title="创建文件夹和删除文件夹命令"></a>创建文件夹和删除文件夹命令</h5><ul>
+<li><p>mkdir  folder     创建一个名为folder 的文件夹</p>
+</li>
+<li><p>mkdir  folder/file3     在folder文件夹下创建一个file3文件</p>
+</li>
+<li><p>rmdir  folder        删除folder文件夹 (文件夹为空的时候才行)</p>
+</li>
+<li><p>rmdir  -r  folder     以递归的方式一个一个的删除文件夹folder的内容</p>
+</li>
+<li><p>touch file           创建一个file文件</p>
+</li>
+<li><p>rm  file1          删除file1文件</p>
+</li>
+</ul>
+<h5 id="文件复制与传送命令"><a href="#文件复制与传送命令" class="headerlink" title="文件复制与传送命令"></a>文件复制与传送命令</h5><ul>
+<li><p>cp  file1  file2   把file1复制给file2(file1会覆盖file2)</p>
+</li>
+<li><p>cp  file1  folder/    把file1文件复制到folder文件夹下</p>
+</li>
+<li><p>cp  -r   folder1   folder2   文件夹之间的复制</p>
+</li>
+<li><p>scp  -r   要发送的文件     slave:接收文件的地址目录</p>
+</li>
+</ul>
+<h5 id="剪切与重命名命令"><a href="#剪切与重命名命令" class="headerlink" title="剪切与重命名命令"></a>剪切与重命名命令</h5><ul>
+<li><p>mv  file1  folder/     将file1文件移动到folder文件夹下</p>
+</li>
+<li><p>mv   file1   file1rename   将file1文件重命名为file1rename</p>
+</li>
+</ul>
+<h5 id="文件浏览命令"><a href="#文件浏览命令" class="headerlink" title="文件浏览命令"></a>文件浏览命令</h5><ul>
+<li><p>ls    浏览文件夹下的所有文件</p>
+</li>
+<li><p>ls  -l  浏览文件夹下的文件并显示文件信息</p>
+</li>
+<li><p>ls  -a  列出所有文件包含隐藏文件</p>
+</li>
+<li><p>cat   file     显示file文件内容</p>
+</li>
+<li><p>cat  file1 &gt; file2  将file1中的文件拿出来放到file2中去</p>
+</li>
+</ul>
+<ol>
+<li><p>wc :统计指定文件中的字节数、字数、行数</p>
+<ul>
+<li>wc -c file        统计file文件的字节数</li>
+<li>wc  -l               行数</li>
+<li>wc  -w        字数​        </li>
+</ul>
+</li>
+<li><p>ls | wc -l            组合命令：就是计算某个文件夹下的文件数</p>
+</li>
+</ol>
+<h5 id="进程和网络的监控"><a href="#进程和网络的监控" class="headerlink" title="进程和网络的监控"></a>进程和网络的监控</h5><ul>
+<li><p>ifconfig        查看网络接口的网络参数</p>
+</li>
+<li><p>netstat  -an         显示网络系统的状态信息</p>
+</li>
+<li><p>netstat  -anp       显示网络信息(包含进程号)    netstat -anp |grep 端口号</p>
+</li>
+<li><p>ps  -aux        显示所有的进程信息</p>
+</li>
+<li><p>top            实时动态查看系统的整体运行情况</p>
+</li>
+<li><p>top  -d  10      屏幕信息每10秒刷新一次</p>
+</li>
+<li><p>kill  5255       表示杀死5255号进程</p>
+</li>
+<li><p>kill   -9   5255   对于一些难以杀死的进程用  -9  参数</p>
+</li>
+</ul>
+<h5 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h5><ul>
+<li><p>grep   -n   ‘查找的内容’   aaa.java    在aaa文件中查找关键字</p>
+</li>
+<li><p>find  /  -name  aaa.java    从根目录开始查找名为aaa.java的文件</p>
+</li>
+<li><p>find  / -cmin  -10    从根目录开始查找10分钟内更改过的文件或目录</p>
+</li>
+<li><p>find  /home  -size  +10k   查找home目录下大于10k的文件</p>
+</li>
+<li><p>find  .   列出当前目录及子目录下的所有文件和文件夹</p>
+</li>
+<li><p>find  .  -name    you.txt     在当前目录及子目录下查找名为you.txt的文件</p>
+</li>
+</ul>
+<h5 id="查看大文件时的分页显示"><a href="#查看大文件时的分页显示" class="headerlink" title="查看大文件时的分页显示"></a>查看大文件时的分页显示</h5><h5 id="more命令（不可返回）"><a href="#more命令（不可返回）" class="headerlink" title="more命令（不可返回）"></a>more命令（不可返回）</h5><ul>
+<li><p>more 从前向后读取文件、一启动就加载了整个文件</p>
+</li>
+<li><p>more  +3 text.log     从第三行开始显示</p>
+</li>
+<li><p>more  -3  text.log     每屏显示3行</p>
+</li>
+<li><p>more   +/liu text.log  在text.log文件中查找liu字符串，并从该处的前两行开始输出</p>
+</li>
+<li><p>也可以和管道命令进行结合        cat  text.log  |  more  -5</p>
+</li>
+</ul>
+<h5 id="less命令（可返回）"><a href="#less命令（可返回）" class="headerlink" title="less命令（可返回）"></a>less命令（可返回）</h5><ul>
+<li><p>less与more命令相似，但是less可以随意浏览文件，而more仅能向前移动，不能向后移动，而且less在查看                                          之前不会加载整个文件</p>
+</li>
+<li><p>退出less模式输入q</p>
+</li>
+</ul>
+<h5 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h5><ul>
+<li><p>head用来将文档的开头致标准输出中</p>
+</li>
+<li><p>head 默认打印前10行</p>
+</li>
+<li><p>head  -n  显示前n行</p>
+</li>
+</ul>
+<h5 id="tail命令"><a href="#tail命令" class="headerlink" title="tail命令"></a>tail命令</h5><ul>
+<li>查看文件尾</li>
+</ul>
 <h5 id="awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理"><a href="#awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理" class="headerlink" title="awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理"></a>awk命令：是处理文本文件的语言，简单来说awk把文件逐行的读入，以空格为默认的分隔符将每行切片，然后再进行各种分析处理</h5><p>​    awk脚本：注意两个关键词BEGIN   END</p>
 <p>​        BEGIN{放执行前的语句}</p>
 <p>​        END{放处理完所有行之后要执行的语句}</p>
@@ -230,47 +316,117 @@
 <p>​        所有行执行结束之后，将a 打印出来</p>
 <p>​    awk  -F   ‘:’  ‘{print  $1}’    awk 以：作为域的分隔符        </p>
 <p>​        $0代表所有域    $1代表第一域</p>
-<h5 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h5><p>​    通常在标准输出或者文件中显示一行文本或者字符串</p>
-<p>​    echo   [参数]    字符串        文本加引号时，将字符串原样输出</p>
+<h5 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h5><ul>
+<li><p>通常在标准输出或者文件中显示一行文本或者字符串</p>
+</li>
+<li><p>echo   [参数]    字符串        文本加引号时，将字符串原样输出</p>
+</li>
+</ul>
 <p>​                            不加引号，将字符串各个单词输出，单词间用空格分隔</p>
-<p>​    echo  -n  字符串            表示不要在最后自动换行</p>
-<p>​    echo   -e   字符串            相当于转义，遇到一些字符要特别处理</p>
-<h5 id="其他一些常用命令"><a href="#其他一些常用命令" class="headerlink" title="其他一些常用命令"></a>其他一些常用命令</h5><p>pwd     返回当前所在路径</p>
-<p>su -  zhang      切换到用户zhang</p>
-<p>管道命令     |      把|前面的交给结果交给|后面的处理</p>
-<p>useradd    zhang    添加用户zhang</p>
-<p>passwd  zhang      给用户zhang添加密码</p>
-<p>userdel  zhang       删除用户zhang    </p>
-<p>userdel   -r   zhang   删除用户zhang及用户主目录</p>
-<p>man   grep     帮助命令</p>
-<p>^    在规则表达式中代表行的开头位置</p>
-<p>/    目录级别分隔符</p>
-<p>.    当前目录</p>
-<p>./a    当前目录下名为a的文件</p>
-<p>sudo 允许普通用户执行root的操作</p>
-<h5 id="yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"><a href="#yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系" class="headerlink" title="yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"></a>yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系</h5><p>​ yum [options][command] [package]</p>
+<ul>
+<li><p>echo  -n  字符串            表示不要在最后自动换行</p>
+</li>
+<li><p>echo   -e   字符串            相当于转义，遇到一些字符要特别处理</p>
+</li>
+</ul>
+<h5 id="其他一些常用命令"><a href="#其他一些常用命令" class="headerlink" title="其他一些常用命令"></a>其他一些常用命令</h5><ul>
+<li><p>pwd     返回当前所在路径</p>
+</li>
+<li><p>su -  zhang      切换到用户zhang</p>
+</li>
+<li><p>管道命令     |      把|前面的交给结果交给|后面的处理</p>
+</li>
+<li><p>useradd    zhang    添加用户zhang</p>
+</li>
+<li><p>passwd  zhang      给用户zhang添加密码</p>
+</li>
+<li><p>userdel  zhang       删除用户zhang    </p>
+</li>
+<li><p>userdel   -r   zhang   删除用户zhang及用户主目录</p>
+</li>
+<li><p>man   grep     帮助命令</p>
+</li>
+<li><p>^    在规则表达式中代表行的开头位置</p>
+</li>
+<li><p>/    目录级别分隔符</p>
+</li>
+<li><p>.    当前目录</p>
+</li>
+<li><p>./a    当前目录下名为a的文件</p>
+</li>
+<li><p>sudo 允许普通用户执行root的操作</p>
+</li>
+</ul>
+<h5 id="yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"><a href="#yum-命令-是一个软件包管理器，自动下载并安装，可以自动处理依赖关系" class="headerlink" title="yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系"></a>yum 命令    是一个软件包管理器，自动下载并安装，可以自动处理依赖关系</h5><ul>
+<li>​ yum [options][command] [package]</li>
+</ul>
 <p>​        opitons 有 -h(显示帮助)        -y（安装过程提示为yes）        -q（不显示安装过程）</p>
 <p>​        command  要进行的操作</p>
 <p>​        package     要安装的包</p>
 <p>​    例如  ： yum install  gcc</p>
-<p>rpm -pal | grep python     用rpm 命令查找文件</p>
-<p>rpm -qa | grep 包名    查找这个包</p>
-<p>rpm -e |grep 包名    删除这个包</p>
-<h5 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h5><p>​    是一个下载文件的工具。可以实现自动下载即wget可以在用户退出系统后在后台执行，直到任务完成</p>
+<ul>
+<li><p>rpm -pal | grep python     用rpm 命令查找文件</p>
+</li>
+<li><p>rpm -qa | grep 包名    查找这个包</p>
+</li>
+<li><p>rpm -e |grep 包名    删除这个包</p>
+</li>
+</ul>
+<h5 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h5><p>​    是一个下载文件的工具。可以实现自动下载即wget可以在用户退出系统后在后台执行，直到任务完成。</p>
 <p>​    wget非常稳定，可以在带宽很窄的情况下适应。如果是由于网络的原因下载失败，wget会不断尝试，直到整</p>
 <p>​    个文件下载完毕。</p>
-<p>​    wget  [参数]    [网址]</p>
+<ul>
+<li>wget  [参数]    [网址]</li>
+</ul>
 <p>​    一般参数项可以忽略</p>
-<h5 id="tee-命令"><a href="#tee-命令" class="headerlink" title="tee 命令"></a>tee 命令</h5><p>​    将数据重定向到文件</p>
-<p>​    tee -a file.txt        将数据重定向到file文件里</p>
-<p>​        -a 表示 数据重定向到文件时使用追加模式。</p>
-<h3 id="查询端口"><a href="#查询端口" class="headerlink" title="查询端口"></a>查询端口</h3><p>netstat -anp |grep 端口号</p>
-<hr>
-<p>持续更新。。。。。。</p>
-<h5 id="安装环境时常用的命令"><a href="#安装环境时常用的命令" class="headerlink" title="安装环境时常用的命令"></a>安装环境时常用的命令</h5><p>编辑环境变量            vim  ~/.bashrc    编辑用户home目录下的隐藏文件bashrc</p>
+<h5 id="tee-命令"><a href="#tee-命令" class="headerlink" title="tee 命令"></a>tee 命令</h5><ul>
+<li><p>将数据重定向到文件</p>
+</li>
+<li><p>tee -a file.txt        将数据重定向到file文件里</p>
+</li>
+<li><p>-a 表示 数据重定向到文件时使用追加模式。</p>
+</li>
+</ul>
+<h5 id="grep命令-文本搜索工具"><a href="#grep命令-文本搜索工具" class="headerlink" title="grep命令        文本搜索工具"></a>grep命令        文本搜索工具</h5><ul>
+<li><p>^    # 锚定行的开始 如：’^grep’匹配所有以grep开头的行。 </p>
+</li>
+<li><p>$    # 锚定行的结束 如：’grep$’ 匹配所有以grep结尾的行。</p>
+</li>
+<li><p>在文件中搜索一个单词，命令会返回一个包含 <strong>“match_pattern”</strong> 的文本行：</p>
+</li>
+</ul>
+<p>​    grep “match_pattern” file_name</p>
+<ul>
+<li>标记匹配颜色 <strong>–color=auto</strong> 选项：</li>
+</ul>
+<p>​    grep “match_pattern” file_name –color=auto</p>
+<ul>
+<li>统计文件或者文本中包含匹配字符串的行数 <strong>-c</strong> 选项：</li>
+</ul>
+<p>​    grep -c “text” file_name</p>
+<ul>
+<li>输出包含匹配字符串的行数 <strong>-n</strong> 选项：</li>
+</ul>
+<p>​    cat file_name | grep “text” -n</p>
+<ul>
+<li>搜索多个文件并查找匹配文本在哪些文件中：</li>
+</ul>
+<p>​    grep -l “text” file1 file2 file3…</p>
+<h5 id="tar-命令"><a href="#tar-命令" class="headerlink" title="tar 命令"></a>tar 命令</h5><ul>
+<li>tar     要打包压缩到什么地方        要打包的文件</li>
+<li>tar -zxvf 文件        在当前目录下解压文件</li>
+<li>tar -zxvf  -C    要打包压缩的地方  打包文件             在指定目录下解压文件 </li>
+</ul>
+<h5 id="安装环境时常用的命令"><a href="#安装环境时常用的命令" class="headerlink" title="安装环境时常用的命令"></a>安装环境时常用的命令</h5><ul>
+<li>编辑环境变量            vim  ~/.bashrc    编辑用户home目录下的隐藏文件bashrc</li>
+</ul>
 <p>​                    ~代表用户的home目录    .在文件名头部代表一个隐藏文件</p>
-<p>刷新环境变量            source ~/.bashrc</p>
-<p>远程发送文件            scp -r         file                       slave：/usr/local……</p>
+<ul>
+<li><p>刷新环境变量            source ~/.bashrc</p>
+</li>
+<li><p>远程发送文件            scp -r         file                       slave：/usr/local……</p>
+</li>
+</ul>
 <p>​                             要发送的文件    发送的目标地址</p>
 
       
