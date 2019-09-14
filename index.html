@@ -147,6 +147,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java虚拟机2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/14/Java虚拟机2/">Java类加载</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/14/Java虚拟机2/" class="archive-article-date">
+  	<time datetime="2019-09-14T13:25:43.250Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>代码编译的结果从本地机器码变成字节码，是存储格式发展的一小步，确实编程语言发展的一大步，如今将我们编写的程序编译成二进制本地机器码已不再是唯一的选择，越来越多的程序语言选择了与操作系统和机器指令集无关的格式作为程序编译后的存储格式。</p>
+<p>各种不同平台的虚拟机与所有平台都使用统一的程序存储格式—-字节码</p>
+        
+          <a class="article-more-a" href="/2019/09/14/Java虚拟机2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+        
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/14/Java虚拟机2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java虚拟机1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -913,100 +1002,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/08/29/Linux常用基础命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Faster RCNN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/Faster RCNN/">Faster-RCNN论文翻译</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/27/Faster RCNN/" class="archive-article-date">
-  	<time datetime="2019-08-27T08:49:42.417Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Faster-RCNN-利用候选区域实现的实时目标检测"><a href="#Faster-RCNN-利用候选区域实现的实时目标检测" class="headerlink" title="Faster RCNN -利用候选区域实现的实时目标检测"></a>Faster RCNN -利用候选区域实现的实时目标检测</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>​    最先进的目标检测网络依赖于候选区域算法来推测目标的位置。比如SPPNet和Fast RCNN 都减少了这些检测</p>
-<p>网络的运行时间，并且都认为候选区域的计算量是一个瓶颈。在这篇文章的工作中，我们介绍了一个候选区域网络</p>
-<p>（RPN），它与检测网络共享整张图片的卷积特征，因此使得候选区域几乎无花费。候选区域网络是一个完全卷积</p>
-<p>网络，可以在每个预测任意位置的目标边界和目标得分。候选区域网络通过端到端的训练来生成高质量的区域提</p>
-<p>案，然后这个候选区域被Fast RCNN用来目标检测。然后通过简单的交替优化，使得候选区域网络和Fast RCNN在</p>
-<p>训练的时候能够共享卷积特征。 对于VGG16模型，我们的系统在一个GPU上达到5帧每秒，并且获得PASCALVOC</p>
-<p>2007和2012最佳准确率（每张图片使用300个候选区域）。</p>
-        
-          <a class="article-more-a" href="/2019/08/27/Faster RCNN/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-        
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/目标检测//" class="article-tag-list-link color5">目标检测</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/27/Faster RCNN/">展开全文 >></a>
         </p>
       
 
