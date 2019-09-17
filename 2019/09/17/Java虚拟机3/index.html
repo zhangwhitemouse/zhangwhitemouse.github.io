@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 目标检测 | white mouse的博客</title>
+  <title>Java字节码执行引擎 | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/categories/目标检测/index.html">
+  <meta name="description" content="分析了虚拟机在执行代码时，如何找到正确的方法，如何执行方法内的字节码，以及执行代码时涉及的内存结构。">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java字节码执行引擎">
+<meta property="og:url" content="http://yoursite.com/2019/09/17/Java虚拟机3/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="分析了虚拟机在执行代码时，如何找到正确的方法，如何执行方法内的字节码，以及执行代码时涉及的内存结构。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-17T04:50:28.288Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="Java字节码执行引擎">
+<meta name="twitter:description" content="分析了虚拟机在执行代码时，如何找到正确的方法，如何执行方法内的字节码，以及执行代码时涉及的内存结构。">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,71 +147,224 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java虚拟机3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/Faster RCNN/" class="archive-article-date">
-  	<time datetime="2019-08-27T08:49:42.417Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/Faster RCNN/">Faster-RCNN论文翻译</a>
+    <h1 class="article-title" itemprop="name">
+      Java字节码执行引擎
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/17/Java虚拟机3/" class="archive-article-date">
+  	<time datetime="2019-09-17T04:51:23.314Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分析了虚拟机在执行代码时，如何找到正确的方法，如何执行方法内的字节码，以及执行代码时涉及的内存结构。</p>
+<a id="more"></a>
+
+<p>所有的Java虚拟机执行引擎都是一致的：输入的是字节码文件，输出的是执行结果。</p>
+<h3 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a>运行时栈帧结构</h3><p>栈帧是用于虚拟机进行方法调用和方法执行的数据结构，是虚拟机运行时数据区的虚拟机栈的元素</p>
+<p>栈帧中存储了方法的：局部变量表、操作数栈、动态连接、方法的返回地址等信息。每个方法从调用到执行，就对</p>
+<p>应着一个栈帧在虚拟机栈的入栈和出栈。</p>
+<ul>
+<li>在编译程序代码的时候，栈帧需要多大的局部变量表、多深的操作数栈就已经完全确定了，因此一个栈帧分配多少内存，不会受到程序运行期变量数据的影响</li>
+<li>如果一个方法的调用链很长， 会出现多个方法同时处于执行状态，但是对于执行引擎来说，活动线程中，只有栈顶的栈帧是有效的，称为<strong>当前栈帧</strong>，对应的方法叫<strong>当前方法**</strong></li>
+</ul>
+<h5 id="局部变量表（栈帧中）"><a href="#局部变量表（栈帧中）" class="headerlink" title="局部变量表（栈帧中）"></a>局部变量表（栈帧中）</h5><p>局部变量表是一组变量值的存储空间，用于存放方法参数和方法内部定义的局部变量。局部变量表以槽slot为最小单位，并且slot是可复用的。（方法体中的变量作用域不一定覆盖整个方法）</p>
+<p><em>局部变量定义了但没有赋值是不能使用的</em></p>
+<h5 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h5><p>操作数栈也被称为操作栈，是一个先入后出的栈。</p>
+<ul>
+<li>当一个方法刚开始执行的时候，操作栈是空的，然后在方法的执行过程中，有各种字节码指令向操作栈写入和提取内容。</li>
+</ul>
+<p><em>Java虚拟机执行引擎也被称为基于栈的执行引擎，这个栈就是指操作栈</em></p>
+<h5 id="动态连接"><a href="#动态连接" class="headerlink" title="动态连接"></a>动态连接</h5><p>每个栈帧都包含一个指向运行时常量池中该栈所属方法的引用，持有这个引用就是为了支持方法调用过程中的动态连接。</p>
+<p>class文件的常量池中存有大量的符号引用，字节码中的方法调用指令，就以常量池中指向方法的符号引用为参数。这些符号引用分成2种转化为直接引用：</p>
+<ul>
+<li>在类加载阶段或第一次使用的时候转换为直接引用（静态解析）</li>
+<li>在每一次的运行期间转换为直接引用（动态连接）</li>
+</ul>
+<h5 id="方法的返回地址"><a href="#方法的返回地址" class="headerlink" title="方法的返回地址"></a>方法的返回地址</h5><p>方法被执行后有两种退出方法：</p>
+<ul>
+<li>执行引擎遇到任意一个方法返回的字节码指令（正常完成出口）</li>
+<li>方法执行过程中遇到异常（异常完成出口）</li>
+</ul>
+<p>无论是哪种退出方式，方法退出后都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复上层方法的执行状态。</p>
+<h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3><p>方法的调用并不等同于方法的执行，方法调用阶段的唯一任务就是确定被调用方法的版本，还不涉及方法内部的具体运行过程。</p>
+<h5 id="解析调用"><a href="#解析调用" class="headerlink" title="解析调用"></a>解析调用</h5><p>所有方法调用中的目标方法在class文件中都是常量池中的符号引用，在类加载的解析阶段，会将一部分符号引用转化为直接引用，这种解析成立的前提是：方法在程序真正运行前就有一个可确定调用的版本，并且这个版本在运行期不可变，这类方法的调用称为解析。</p>
+<p><strong>符合编译期可知，运行期不变的</strong>的方法主要是<strong>静态方法和私有方法</strong></p>
+<p><em>解析调用在类加载的解析阶段就把涉及的符号引用全部转变成可确定的直接引用</em></p>
+<h5 id="分派调用"><a href="#分派调用" class="headerlink" title="分派调用"></a>分派调用</h5><p>会揭示多态性特征的一些体现</p>
+<p><strong>静态分派</strong>：最典型的应用就是方法重载，虚拟机在重载时通过参数的静态类型而不是实际类型作为判断依据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDispatch</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Human</span></span>&#123;&#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">extends</span> <span class="title">Human</span></span>&#123;&#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">Human</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayhello</span><span class="params">(Human guy)</span></span>&#123;</span><br><span class="line">        system.out.println(<span class="string">"hello huy"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayhello</span><span class="params">(Man guy)</span></span>&#123;</span><br><span class="line">        system.out.println(<span class="string">"hello man"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayhello</span><span class="params">(Woman guy)</span></span>&#123;</span><br><span class="line">        system.out.println(<span class="string">"hello lady"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Human man = <span class="keyword">new</span> Man();</span><br><span class="line">    Human women = <span class="keyword">new</span> Woman();</span><br><span class="line">    StaticResolution sr = <span class="keyword">new</span> StaticResolution();</span><br><span class="line">    sr.sayhello(man);</span><br><span class="line">    sr.sayhello(women);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">##################</span><br><span class="line">say huy</span><br><span class="line">say huy</span><br></pre></td></tr></table></figure>
+
+<p>虽然编译器能够确定出方法的重载版本，但是在很多情况下，重载的版本并不唯一，那么就需要我们去确定一个更加合适的版本。</p>
+<h5 id="动态分派"><a href="#动态分派" class="headerlink" title="动态分派"></a>动态分派</h5><p>多态性另一个重要体现：重写</p>
+<p>这个就比较好理解了，就是根据运行期的实际类型确定方法的执行版本</p>
+<p><em>这一小结只能写到这了，因为里面的细节太多，我自己都没有弄清楚，就不霍霍别人了</em></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+        
+          <span id="busuanzi_container_page_pv">
+            ⋉(●本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次●)⋊
+          </span>
+        
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CV</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/目标检测//" class="article-tag-list-link color5">目标检测</a>
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/17/Java虚拟机3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/14/Java虚拟机2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java类加载</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,10 +391,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
