@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: Linux | white mouse的博客</title>
+  <title>issues | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/categories/Linux/index.html">
+  <meta name="description" content="持续更新！！！">
+<meta name="keywords" content="big data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="issues">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/Hadoop-issues/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="持续更新！！！">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/.com//E:%5Cblog%5Cpic%5Clog.png">
+<meta property="og:updated_time" content="2019-09-24T13:30:32.310Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="issues">
+<meta name="twitter:description" content="持续更新！！！">
+<meta name="twitter:image" content="http://yoursite.com/.com//E:%5Cblog%5Cpic%5Clog.png">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,120 +149,222 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Hadoop-issues" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/29/Linux常用基础命令/" class="archive-article-date">
-  	<time datetime="2019-08-29T12:27:56.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/29/Linux常用基础命令/">Linux常用命令</a>
+    <h1 class="article-title" itemprop="name">
+      issues
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/24/Hadoop-issues/" class="archive-article-date">
+  	<time datetime="2019-09-24T13:31:15.979Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>持续更新！！！</p>
+<a id="more"></a>
+
+<h5 id="使用过程中出现的问题及解决方案"><a href="#使用过程中出现的问题及解决方案" class="headerlink" title="使用过程中出现的问题及解决方案"></a>使用过程中出现的问题及解决方案</h5><ol>
+<li>hdfs 删除问题</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">执行	hdfs dfs -rm -r /output</span><br><span class="line">出现	rm: Cannot delete /output. Name node is in safe mode</span><br><span class="line">原因	NameNode 处于安全模式中</span><br><span class="line">解决	退出安全模式即可	hdfs dfsadmin -safemode leave</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>进程未启动，进入logs目录查看该进程的日志</p>
+<p> 哪个未启动就查看哪个<img src="/.com//E:%5Cblog%5Cpic%5Clog.png" alt="log"></p>
+<p>如果是Hadoop集群正常，MR作业运行错误，可以查看作业的运行日志，就是userlogs。进入文件夹后，发</p>
+<p>现有很多以往运行的作业，每个作业下有三类文件 stderr    stdout    syslog，分别是作业错误日志，作业输</p>
+<p>出日志（如果任务中没有指定输出路径），系统日志。</p>
+</li>
+</ol>
+<h5 id="记录一下："><a href="#记录一下：" class="headerlink" title="记录一下："></a>记录一下：</h5><p>​    Linux     用户密码        123123</p>
+<ol start="3">
+<li><p>spark 集群中的worker进程消失</p>
+<ul>
+<li><p>主要是因为master在启动的时候，使用127.0.0.1替换了你原来主机的IP地址，而slave1，salve2在连接master的过程中，master被解析为127.0.0.1，和原本的IP不对应造成的，所以我们需要修改主机名与IP的一一对应关系</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line"></span><br><span class="line">192.168.217.3 master</span><br><span class="line">192.168.217.4 slave1</span><br><span class="line">192.168.217.5 slave2</span><br><span class="line"></span><br><span class="line">master和slave机上都需要修改</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">查看log：</span><br><span class="line">WARN org.apache.hadoop.hdfs.server.datanode.DataNode: Problem connecting to server: master/192.168.217.3:9000</span><br><span class="line">ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: RECEIVED SIGNAL 15: SIGTERM</span><br><span class="line">INFO org.apache.hadoop.hdfs.server.datanode.DataNode: SHUTDOWN_MSG:</span><br><span class="line"></span><br><span class="line">在保证你的配置信息和hosts文件没有问题的情况下，有极大的可能就是防火墙的问题了</span><br><span class="line"></span><br><span class="line">查看防火墙状态</span><br><span class="line">systemctl status firewalld.service</span><br><span class="line">关闭防火墙</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">禁止再次开机重启防火墙服务</span><br><span class="line">systemctl disable firewalld.service</span><br><span class="line"></span><br><span class="line">好像很多问题都是防火墙带来的连锁反应</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-安装MySQL的时候"><a href="#4-安装MySQL的时候" class="headerlink" title="4. 安装MySQL的时候"></a>4. 安装MySQL的时候</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add mysqld</span><br><span class="line">出现：</span><br><span class="line">服务 mysqld 信息读取出错：没有那个文件或目录</span><br><span class="line"></span><br><span class="line">添加开机启动服务（--add就是增加所指定的系统服务）</span><br><span class="line"><span class="meta">#</span>########并没有解决</span><br><span class="line"></span><br><span class="line">service mysqld restart</span><br><span class="line">出现</span><br><span class="line">Redirecting to /bin/systemctl restart mysqld.service</span><br><span class="line">Job for mysqld.service failed because the control process exited with error code. See "systemctl status mysqld.service" and "journalctl -xe" for details.</span><br><span class="line"></span><br><span class="line">执行systemctl status mysqld.service</span><br><span class="line">Failed to start MySQL Community Server.</span><br><span class="line"></span><br><span class="line">chmod -R 777 /var/lib/mysql</span><br><span class="line">rm -rf /var/lib/mysql/*</span><br><span class="line">重新启动service mysqld restart</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+        
+          <span id="busuanzi_container_page_pv">
+            ⋉(●本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次●)⋊
+          </span>
+        
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">big data</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/24/Hadoop-issues/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/Vim常用命令/" class="archive-article-date">
-  	<time datetime="2019-08-27T05:30:17.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/09/24/集群环境/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hadoop环境搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/17/Java虚拟机3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java字节码执行引擎</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/Vim常用命令/">Vim常用命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -285,10 +391,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

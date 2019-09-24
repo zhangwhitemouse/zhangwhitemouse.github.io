@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: Linux | white mouse的博客</title>
+  <title>Hadoop环境搭建 | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/categories/Linux/index.html">
+  <meta name="description" content="持续更新！！！（与issues一起食用，感受更加）">
+<meta name="keywords" content="big data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop环境搭建">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/集群环境/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="持续更新！！！（与issues一起食用，感受更加）">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-24T13:30:04.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="Hadoop环境搭建">
+<meta name="twitter:description" content="持续更新！！！（与issues一起食用，感受更加）">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,120 +147,209 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-集群环境" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/29/Linux常用基础命令/" class="archive-article-date">
-  	<time datetime="2019-08-29T12:27:56.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/29/Linux常用基础命令/">Linux常用命令</a>
+    <h1 class="article-title" itemprop="name">
+      Hadoop环境搭建
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/24/集群环境/" class="archive-article-date">
+  	<time datetime="2019-09-24T13:31:15.980Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>持续更新！！！（与issues一起食用，感受更加）</p>
+<a id="more"></a>
+
+<h5 id="集群安装顺序"><a href="#集群安装顺序" class="headerlink" title="集群安装顺序"></a>集群安装顺序</h5><pre><code>集群的基本组件安装是有依赖关系的，所以我们首先需要知道先安装那些组件，然后再安装其他组件。</code></pre><ol>
+<li>先要安装Hadoop（Hadoop安装成功的同时，hbase也安装成功了）</li>
+<li>然后再安装zookeeper</li>
+<li>storm 和Kafka依赖于zookeeper</li>
+<li>spark on yarn 依赖于Hadoop</li>
+<li>其他的组件可以随便来</li>
+</ol>
+<h5 id="预先说明"><a href="#预先说明" class="headerlink" title="预先说明"></a>预先说明</h5><pre><code>我一共有三台主机，master 172.16.11.97 ，slave1 172.16.11.98，slave2 172.16.11.99</code></pre><h5 id="Hadoop的安装"><a href="#Hadoop的安装" class="headerlink" title="Hadoop的安装"></a>Hadoop的安装</h5><p>安装包的版本为2.6.5，链接<a href="http://archive.apache.org/dist/hadoop/common/hadoop-2.6.5/hadoop-2.6.5.tar.gz" target="_blank" rel="noopener">http://archive.apache.org/dist/hadoop/common/hadoop-2.6.5/hadoop-2.6.5.tar.gz</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">master上操作</span></span><br><span class="line">wget http://archive.apache.org/dist/hadoop/common/hadoop-2.6.5/hadoop-2.6.5.tar.gz</span><br><span class="line">下载完成后解压</span><br><span class="line">tar zxvf hadoop-2.6.5.tar.gzf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">为了保证三台机器的通信，关闭系统防火墙及内核防火墙</span></span><br><span class="line"><span class="meta">#</span><span class="bash">master slave1 slave2上操作</span></span><br><span class="line">iptables -F		清空系统防火墙</span><br><span class="line">service iptables save	保存防火墙配置</span><br><span class="line"></span><br><span class="line">vim /etc/selinux/config		永久关闭内核防火墙</span><br><span class="line">	SELINUX=disabled</span><br><span class="line">	</span><br><span class="line"><span class="meta">#</span><span class="bash">开始修改Hadoop的配置文件 master上操作</span></span><br><span class="line">cd hadoop-2.6.5/etc/hadoop	进入文件夹</span><br><span class="line"></span><br><span class="line">vim hadoop-env.sh	</span><br><span class="line">	export JAVA_HOME=/usr/local/src/jdk1.8.0_152	将jdk的安装路径加入到hadoop环境下</span><br><span class="line">vim yarn-env.sh</span><br><span class="line">	export JAVA_HOME=/usr/local/src/jdk1.8.0_152	将jdk的安装路径加入到yarn环境下</span><br><span class="line">vim slaves		#将两台从主机的主机名加进去</span><br><span class="line">	slave1</span><br><span class="line">	slave2</span><br><span class="line"></span><br><span class="line">vim core-site.xml	</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;		#设置Hdfs服务的主机名和端口号</span><br><span class="line">        &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;	#配置Hadoop的临时目录，用来存放每次运行作业的job信息</span><br><span class="line">        &lt;value&gt;file:/usr/local/src/hadoop-2.8.2/tmp/&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line"></span><br><span class="line">vim hdfs-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:9001&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;	#namenode存储永久性元数据的目录列表</span><br><span class="line">        &lt;value&gt;file:/usr/local/src/hadoop-2.8.2/dfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;	#datanode存放数据块的目录列表</span><br><span class="line">        &lt;value&gt;file:/usr/local/src/hadoop-2.8.2/dfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;	#设置文件副本数</span><br><span class="line">        &lt;value&gt;2&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">vim mapred-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;	#指定运行mr的环境为yarn</span><br><span class="line">        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line"></span><br><span class="line">vim yarn-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;	#为了能运行mr，需要让Nodemanager启动加载shuffle server</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:8032&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:8030&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:8035&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:8033&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:8088&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;!-- 关闭虚拟内存检查--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.vmem-check-enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Hive内置模式的安装"><a href="#Hive内置模式的安装" class="headerlink" title="Hive内置模式的安装"></a>Hive内置模式的安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">安装步骤：</span><br><span class="line">	下载、解压、添加环境变量</span><br><span class="line">修改配置文件：</span><br><span class="line">cp hive-default.xml.template hive-site.xml</span><br><span class="line">vim hive-site.xml</span><br><span class="line"><span class="meta">#</span><span class="bash">该参数指定了 Hive 的数据存储目录，默认位置在 HDFS 上面的 /user/hive/warehouse 路径下。</span></span><br><span class="line"> &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.exec.scratchdir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/tmp/hive&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  </span><br><span class="line">cp hive-env.sh.template hive-env.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> Set HADOOP_HOME to point to a specific hadoop install directory</span></span><br><span class="line">HADOOP_HOME=/home/hadoop/hadoop-2.7.3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Hive Configuration Directory can be controlled by:</span></span><br><span class="line">export HIVE_CONF_DIR=/home/hadoop/apache-hive-2.1.1-bin/conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Folder containing extra ibraries required <span class="keyword">for</span> hive compilation/execution can be controlled by:</span></span><br><span class="line">export HIVE_AUX_JARS_PATH=/home/hadoop/apache-hive-2.1.1-bin/lib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">创建目录</span></span><br><span class="line">[hadoop@master ~]$ hdfs dfs -mkdir -p /user/hive/warehouse</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -mkdir -p /tmp/hive</span><br><span class="line"><span class="meta">#</span><span class="bash">赋予写权限</span></span><br><span class="line">[hadoop@master ~]$ hdfs dfs -chmod a+w /tmp/hive</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -chmod a+w /user/hive/warehouse</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">这里是本地路径，不是hdfs路径</span></span><br><span class="line">[hadoop@master conf]$ mkdir /home/hadoop/apache-hive-2.1.1-bin/iotmp</span><br><span class="line"><span class="meta">#</span><span class="bash">vim全局替换</span></span><br><span class="line"><span class="meta">%</span><span class="bash">s<span class="comment">#$&#123;system:java.io.tmpdir&#125;#/home/hadoop/cloud/apache-hive-2.1.1-bin/iotmp#g  </span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">还需要将如下的system:删除</span></span><br><span class="line"><span class="meta"> $</span><span class="bash">&#123;system:java.io.tmpdir&#125;/<span class="variable">$&#123; system:user.name&#125;</span></span></span><br><span class="line"> </span><br><span class="line">初始化：schematool -initSchema -dbType derby</span><br><span class="line"></span><br><span class="line">出现问题：</span><br><span class="line">org.apache.hadoop.hive.metastore.HiveMetaException: Failed to get schema version.</span><br><span class="line">*** schemaTool failed ***</span><br><span class="line"></span><br><span class="line">解决方案：</span><br><span class="line">原因是根目录下已经有了一个metastore_db，把该文件夹删掉再次执行一下初始化命令即可</span><br><span class="line"></span><br><span class="line">出现问题：</span><br><span class="line">Exception in thread "main" java.lang.IncompatibleClassChangeError: Found class jline.Terminal, but interface was expected</span><br><span class="line"></span><br><span class="line">解决方法：hadoop目录下存在老版本jline</span><br><span class="line"></span><br><span class="line">cp /hive/apache-hive-1.1.0-bin/lib/jline-2.12.jar /hadoop-2.5.2/share/hadoop/yarn/lib 将Hadoop老版本的Jline删掉</span><br><span class="line"></span><br><span class="line">进入hive后出现问题：</span><br><span class="line">Failed with exception java.io.IOException:java.lang.IllegalArgumentException: java.net.URISyntaxException: Relative path in absolute URI: $&#123;system:user.name%7D</span><br><span class="line"></span><br><span class="line">解决方法；</span><br><span class="line"><span class="meta">#</span><span class="bash">还需要将如下的system:删除</span></span><br><span class="line"><span class="meta"> $</span><span class="bash">&#123;system:java.io.tmpdir&#125;/<span class="variable">$&#123; system:user.name&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Spark的安装"><a href="#Spark的安装" class="headerlink" title="Spark的安装"></a>Spark的安装</h5><ol>
+<li>包的准备</li>
+</ol>
+<ul>
+<li>spark-1.6.3-bin-hadoop2.6.tgz</li>
+<li>scala-2.10.5.tgz</li>
+</ul>
+<ol start="2">
+<li>开始搭建集群</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf spark-1.6.3-bin-hadoop2.6.tgz</span><br><span class="line">tar -zxvf scala-2.10.5.tgz</span><br><span class="line"></span><br><span class="line">master节点操作：</span><br><span class="line">cd spark-1.6.3-bin-hadoop2.6.tgz/conf</span><br><span class="line">mv spark-env.sh.template spark-env.sh</span><br><span class="line"></span><br><span class="line">vim spark-env.sh</span><br><span class="line">export SCALA_HOME=/usr/local/src/scala-2.12.4</span><br><span class="line">export JAVA_HOME=/usr/local/src/jdk1.8.0_152</span><br><span class="line">export HADOOP_HOME=/usr/local/src/hadoop-2.8.2</span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line">SPARK_MASTER_IP=master</span><br><span class="line">SPARK_LOCAL_DIRS=/usr/local/src/spark-1.6.3-bin-hadoop2.6</span><br><span class="line">SPARK_DRIVER_MEMORY=1G</span><br><span class="line"></span><br><span class="line">mv slaves.template slaves</span><br><span class="line">vim slaves	#如果保留localhost，则表示你的主节点也可以作为worker</span><br><span class="line"></span><br><span class="line">slave1</span><br><span class="line">slave2</span><br><span class="line"></span><br><span class="line">拷贝安装包到其他节点</span><br><span class="line">scp -r /usr/local/src/spark-1.6.3-bin-hadoop2.6 root@slave1:/usr/local/src/spark-			1.6.3-bin-hadoop2.6</span><br><span class="line">scp -r /usr/local/src/spark-1.6.3-bin-hadoop2.6 root@slave2:/usr/local/src/spark-1.6.3-bin-hadoop2.6</span><br><span class="line"></span><br><span class="line">然后就可以启动集群了</span><br><span class="line">cd /usr/local/src/spark-1.6.3-bin-hadoop2.6/sbin</span><br><span class="line">./start-all.sh</span><br><span class="line"></span><br><span class="line">关闭集群</span><br><span class="line">./stop-all.sh</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+        
+          <span id="busuanzi_container_page_pv">
+            ⋉(●本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次●)⋊
+          </span>
+        
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">big data</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/24/集群环境/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/Vim常用命令/" class="archive-article-date">
-  	<time datetime="2019-08-27T05:30:17.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/24/Hadoop-issues/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">issues</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/Vim常用命令/">Vim常用命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -285,10 +376,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
