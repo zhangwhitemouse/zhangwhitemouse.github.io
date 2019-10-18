@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MapReduce分布式计算框架 | white mouse的博客</title>
+  <title>Storm | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这也太难整理了，自己在学的时候怎么就忘记整理了呢，都是自己欠下的债">
+  <meta name="description" content="自己手动复习一遍，这个效率确实要高一点哦">
 <meta name="keywords" content="big data">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MapReduce分布式计算框架">
-<meta property="og:url" content="http://yoursite.com/2019/10/17/MapReduce/index.html">
+<meta property="og:title" content="Storm">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/Storm/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="这也太难整理了，自己在学的时候怎么就忘记整理了呢，都是自己欠下的债">
+<meta property="og:description" content="自己手动复习一遍，这个效率确实要高一点哦">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-17T13:06:12.477Z">
+<meta property="og:updated_time" content="2019-10-18T12:31:07.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MapReduce分布式计算框架">
-<meta name="twitter:description" content="这也太难整理了，自己在学的时候怎么就忘记整理了呢，都是自己欠下的债">
+<meta name="twitter:title" content="Storm">
+<meta name="twitter:description" content="自己手动复习一遍，这个效率确实要高一点哦">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -147,91 +147,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MapReduce" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Storm" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MapReduce分布式计算框架
+      Storm
     </h1>
   
 
         
-        <a href="/2019/10/17/MapReduce/" class="archive-article-date">
-  	<time datetime="2019-10-17T13:06:59.058Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
+        <a href="/2019/10/18/Storm/" class="archive-article-date">
+  	<time datetime="2019-10-18T12:31:46.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这也太难整理了，自己在学的时候怎么就忘记整理了呢，都是自己欠下的债</p>
+        <p>自己手动复习一遍，这个效率确实要高一点哦</p>
 <a id="more"></a>
 
-<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>MapReduce用于处理海量数据的分布式计算框架，核心思想就是将复杂的任务分成若干个简单的任务。而且MapReduce是多进程并发模型（直接制约了MapReduce不能运行低延时的作业，适合离线操作）</p>
-<h5 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h5><p>MapReduce采用主从结构，主是JobTracker（一般一个集群只有一个JobTracker），从是TaskTracker。</p>
-<p>JobTracker的主要功能：</p>
-<p>（1）作业的调度与监控</p>
-<p>（2）接收客户端的请求</p>
-<p>TaskTracker的主要功能：</p>
-<p>（1）真正执行任务的节点</p>
-<p>（2）周期性的向Job Tracker汇报状态</p>
-<h5 id="MapReduce执行流程"><a href="#MapReduce执行流程" class="headerlink" title="MapReduce执行流程"></a>MapReduce执行流程</h5><ul>
-<li>提交作业</li>
+<h2 id="Storm"><a href="#Storm" class="headerlink" title="Storm"></a>Storm</h2><p>MapReduce适合离线数据的批量处理，实时性不高，不能满足实习处理的需求，而Storm采用增量处理的方式</p>
+<p>（数据来一条处理一条），提供大吞吐量的实时计算能力，适合实时性较高的数据分析场景。</p>
+<h5 id="Storm的特征"><a href="#Storm的特征" class="headerlink" title="Storm的特征"></a>Storm的特征</h5><p>（1）没有持久化层，数据一直在内存中流转</p>
+<p>（2）有可靠的消息处理保证机制（保证消息得到处理）</p>
+<p>（3）支持多种编程语言（和hadoop采用Streaming的方式不同，它采用Thift RPC的方式来实现）</p>
+<p>（4）支持本地模式，可模拟集群的所有功能</p>
+<h5 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h5><ul>
+<li>基本单位</li>
 </ul>
-<p>（1）client向JobTracker启动作业作业提流程</p>
-<p>（2）JobTracker返回一个JobID给Client，然后Client端检查运行作业所需的资源（配置文件，计算分片等），并将这些信息放到HDFS上以Job ID创建的目录</p>
-<p>（3）通知JobTracker，作业准备执行</p>
+<p>（1）Storm中以Tuple为基本单位，多个Tuple组成一条有向无界的数据流</p>
 <ul>
-<li>作业初始化</li>
+<li>Topology</li>
 </ul>
-<p>（1）将任务放入任务调度器，等待执行。</p>
+<p>（1）Topology相当于MapReduce中的Job，是计算逻辑的封装。</p>
+<p>（2）一个topology中内含多个数据处理单元，且数据单元之间存在相互依赖关系</p>
+<p>（3）一个Topology可以由多个Spout和多个bolts组成</p>
+<p>（4）spout和bolt之间通过Streaming Grouping的方式连接</p>
 <ul>
-<li>分配任务</li>
+<li>Spout</li>
 </ul>
-<p>（1）JobTracker根据就近原则分配任务，分发任务给TaskTracker</p>
-<p>（2）Task Tracker负责具体任务的执行</p>
-<h5 id="MapReduce计算框架"><a href="#MapReduce计算框架" class="headerlink" title="MapReduce计算框架"></a>MapReduce计算框架</h5><p>（1）Hadoop 从HDFS读取数据</p>
-<p>（2）经过数据分片（最好的情况是一个数据片的大小和HDFS中块的大小一致），传输给Map（一个split对应一个Map任务）</p>
-<p><em>并不是所有的数据都需要split，压缩文件就不可切分（在严格限制Map的个数的时候，可以使用压缩文件按）</em></p>
-<p>（3）Map端的输出按照不同的key发送给不同的reduce处理（相同的Key发送到同一个Reduce中）</p>
-<h5 id="MapReduce的shuffle阶段"><a href="#MapReduce的shuffle阶段" class="headerlink" title="MapReduce的shuffle阶段"></a>MapReduce的shuffle阶段</h5><p>Shuffle阶段指的是从Map阶段的输出开始，到输出传递给Reduce这一过程</p>
+<p>（1）是一个topology中获取数据流的组件，负责从外部读取数据，然后将数据转换成topology内部的数据格式</p>
+<p>（2）spout可以分为可靠的和不可靠的。—–不可靠：不关心元组是否被成功处理，只是将元组发送拓扑 ——可靠的：成功处理时调用ACK，不成功时调用Fail；并且在一个元组处理失败时，会重新发送。</p>
 <ul>
-<li>Map的shuffle阶段</li>
+<li>bolt</li>
 </ul>
-<p>（1）Map的输出的数据格式是key-value的形式，我们首先根据数据最终被哪个Reduce处理，将分成几个分区（默认是对key进行hash，然后再根据reduce的数量进行取模）</p>
-<p>（2）Map的输出被写入缓冲区（默认大小100M）的不同的分区（partation）之后，后台线程线程会按照key对partation内的数据进行排序。当缓冲区数据占到内存的80%，启动溢写线程。</p>
-<p>（3）启动溢写线程之后，这部分数据就被锁定了，然后对这部分数据按照（partation,key）进行排序，最后溢写成一个spill文件。</p>
-<p>（4）当所有的Map任务结束后，会出现多个spill文件，这些spill文件被合并成索引文件和数据文件（归并排序）</p>
-<p>（5）每个TaskTracker上相当于生成一个索引文件和一个数据文件</p>
+<p>（1）处于整个topology的中间和结束环节，拓扑中的所有计算逻辑都在Bolt中实现，能够进行函数、合并、数据库的读写等操作</p>
+<p>（2）一个Bolt可以发射多个流</p>
+<p>（3）当bolt为输入流时，需要订阅其他组件的流，每个流的订阅都是一个个的添加的。</p>
 <ul>
-<li>Reduce的shuffle阶段</li>
+<li>Streaming Group</li>
 </ul>
-<p>（1）从不同的TaskTracker上获取输出文件（copy阶段），相同分区的在一个reduce中</p>
-<p>（2）将复制过来的数据先放在内存中，然后进行Merge，当reduce输入文件已定，整个shuffle阶段就结束了</p>
-<h5 id="MapReduce编程模型"><a href="#MapReduce编程模型" class="headerlink" title="MapReduce编程模型"></a>MapReduce编程模型</h5><p>原生支持Java开发，但是Java开发太麻烦,Hadoop提供了hadoop Streaming的方式，允许任何语言都可以开发mapreduce</p>
-<p>Streaming开发方式的优缺点：</p>
-<p>（1）优点：方便调试，便于对系统开销进行限制</p>
-<p>（2）缺点：只能处理文本数据；两次拷贝与解析带来一定的开销</p>
-<h5 id="文件分发方式（配置文件加载的方式）"><a href="#文件分发方式（配置文件加载的方式）" class="headerlink" title="文件分发方式（配置文件加载的方式）"></a>文件分发方式（配置文件加载的方式）</h5><p>（1）-file    本地小文件</p>
-<p>（2）-cacheFile    HDFS上的文件</p>
-<p>（3）-cacheArchive    HDFS上的压缩文件</p>
-<h2 id="Hadoop2-0"><a href="#Hadoop2-0" class="headerlink" title="Hadoop2.0"></a>Hadoop2.0</h2><p>2.0针对1.0的JobTracker任务过重，造成太多资源消耗；并且存在单点问题。引入一个统一的资源管理器YARN，将Job Tracker的任务进行拆分。YARN作为一个集群的资源管理系统，负责集群的资源及调度，而MapReduce变成了运行在YARN上的一个计算框架。</p>
-<h5 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h5><ul>
-<li>Resource Manager（RM）承接JobTracker的资源管理工作，负责整个系统的资源管理与分配，其上面运行着一个可插拔的调度器，负责运行中各种资源的分配</li>
-<li>Node Manager （NM）管理节点本地的资源，一方面定时向RM汇报节点上资源的使用情况和各个Container的运行状态；同时他还要接收来自AM的对Container启动和停止等请求</li>
-<li>Application Master（AM）是每个任务的主，承接JobTracker的任务监控，负责一个Application生命周期内的所有工作，运行在除RM以外的任何机器上，本质也是一个Container。</li>
-<li>Container是YARN上用作资源隔离的框架，对单个节点上的CPU和内存进行封装，兼容各种计算框架。而２.０与１.０最大的区别就在于资源是动态申请的。</li>
+<p>提供4种形式的分发策略</p>
+<p>（1）shuffle Grouping    随机分组</p>
+<p>（2）Fields Grouping        按指定的field分组</p>
+<p>（3）All Grouping        广播分组</p>
+<p>（4）Global Grouping        全局分组</p>
+<h5 id="组件与架构"><a href="#组件与架构" class="headerlink" title="组件与架构"></a>组件与架构</h5><p>Storm采用主从架构，并且依赖于zookeeper。</p>
+<ul>
+<li>Nimbus</li>
 </ul>
-<h5 id="YARN上的调度器"><a href="#YARN上的调度器" class="headerlink" title="YARN上的调度器"></a>YARN上的调度器</h5><p>RM上提供了２种调度器</p>
-<p>（１）FIFO Scheduler        顺序执行</p>
-<p>（２）Capacity　Scheduler    专有队列运行小任务</p>
-<p>（３）Fair　Scheduler    动态调整，公平共享</p>
-<h5 id="YARN的容错"><a href="#YARN的容错" class="headerlink" title="YARN的容错"></a>YARN的容错</h5><p>（１）RM挂掉：新版本的Hadoop可以提供HA</p>
-<p>（２）NM挂掉：通过心跳通知RM，RM通知AM，AM再进行处理</p>
-<p>（３）AM挂掉：RM负责重启，RM上有一个RMApplication　Master，可以看成是AM的AM，上面保存着已经运行完的task，重启AM，无需运行已经完成的任务。</p>
+<p>是服务端的守护进程，主要负责进程之间的任务调度，监控任务的运行状态</p>
+<ul>
+<li>Supervisor</li>
+</ul>
+<p>也是守护进程，接收Nimbus分配的任务，启动和管理属于自己的Worker进程（一个或多个）</p>
+<ul>
+<li>executor</li>
+</ul>
+<p>一个worker进程里面会运行着多个executor，每个executor里面只会运行一个topology的一个component的task实例（这里的task指的是spout或者bolt）</p>
+<ul>
+<li>zookeeper</li>
+</ul>
+<p>zookeeper在整个Storm中用来提供协调服务，存储拓扑的状态和统计数据。正是由于状态信息都存在zookeeper上，所以Storm集群是无状态的，任何一个节点失败和重启都不会影响整个集群。</p>
+<h5 id="Storm开发"><a href="#Storm开发" class="headerlink" title="Storm开发"></a>Storm开发</h5><p>下回有空再写呀！！！</p>
 
       
 
@@ -338,7 +330,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/17/MapReduce/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/18/Storm/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -352,18 +344,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/18/Storm/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Storm
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/16/HDFS/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HDFS分布式文件系统</div>
+    <a href="/2019/10/17/MapReduce/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MapReduce分布式计算框架</div>
       <i class="icon-circle-right"></i>
     </a>
   
