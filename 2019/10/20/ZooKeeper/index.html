@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | white mouse的博客</title>
+  <title>zookeeper | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="zookeeperzookeeper是一个开源的分布式服务协调组件，它将复杂易错的分布式一致性服务封装起来，提供一系列的接口给用户使用。 对zookeeper的描述可以用一句话来完成：一个松散耦合的分布式系统、粗粒度锁以及可靠存储低容量的系统 （1）松散耦合：对硬件要求不高 （2）粗粒度锁：单机系统中的进程锁是非常细的，而分布式系统中锁，只需要保证每台机器按规则协调工作即可 （3）可靠存储：z">
+<meta name="keywords" content="big data">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/hello-world/index.html">
+<meta property="og:title" content="zookeeper">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/ZooKeeper/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="zookeeperzookeeper是一个开源的分布式服务协调组件，它将复杂易错的分布式一致性服务封装起来，提供一系列的接口给用户使用。 对zookeeper的描述可以用一句话来完成：一个松散耦合的分布式系统、粗粒度锁以及可靠存储低容量的系统 （1）松散耦合：对硬件要求不高 （2）粗粒度锁：单机系统中的进程锁是非常细的，而分布式系统中锁，只需要保证每台机器按规则协调工作即可 （3）可靠存储：z">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-25T07:43:55.461Z">
+<meta property="og:updated_time" content="2019-10-20T13:31:40.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="zookeeper">
+<meta name="twitter:description" content="zookeeperzookeeper是一个开源的分布式服务协调组件，它将复杂易错的分布式一致性服务封装起来，提供一系列的接口给用户使用。 对zookeeper的描述可以用一句话来完成：一个松散耦合的分布式系统、粗粒度锁以及可靠存储低容量的系统 （1）松散耦合：对硬件要求不高 （2）粗粒度锁：单机系统中的进程锁是非常细的，而分布式系统中锁，只需要保证每台机器按规则协调工作即可 （3）可靠存储：z">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -146,39 +147,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ZooKeeper" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      zookeeper
     </h1>
   
 
         
-        <a href="/2019/08/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-25T07:43:55.454Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2019/10/20/ZooKeeper/" class="archive-article-date">
+  	<time datetime="2019-10-20T13:32:22.103Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><p>zookeeper是一个开源的分布式服务协调组件，它将复杂易错的分布式一致性服务封装起来，提供一系列的接口给用户使用。</p>
+<p>对zookeeper的描述可以用一句话来完成：一个松散耦合的分布式系统、粗粒度锁以及可靠存储低容量的系统</p>
+<p>（1）松散耦合：对硬件要求不高</p>
+<p>（2）粗粒度锁：单机系统中的进程锁是非常细的，而分布式系统中锁，只需要保证每台机器按规则协调工作即可</p>
+<p>（3）可靠存储：zookeeper的节点是能够存储少量信息的</p>
+<h5 id="zookeeper的特性"><a href="#zookeeper的特性" class="headerlink" title="zookeeper的特性"></a>zookeeper的特性</h5><p>（1）客户端更新顺序与它们的发送顺序一致</p>
+<p>（2）原子性操作：要么操作全部成功，要么全部失败</p>
+<p>（3）单一视图：无论哪个客户端连接上来，看到的视图应该都是一样的</p>
+<p>（4）实时性：一段时间内，系统的任何变更，客户端都能检测到</p>
+<h5 id="zookeeper的数据模型和节点类型"><a href="#zookeeper的数据模型和节点类型" class="headerlink" title="zookeeper的数据模型和节点类型"></a>zookeeper的数据模型和节点类型</h5><p>zookeeper的数据模型与Linux的文件目录树是一致的，但是zookeeper只有绝对路径，没有相对路径。zookeeper中每一个节点（znode）都存储自身的信息，包括数据，数据长度，创建时间，修改时间。</p>
+<ul>
+<li>zookeeper的节点有三种属性，构成了4种节点：</li>
+</ul>
+<p>（1）永久节点（Persistent node）永久有效的节点，除非client显示删除，否则一直存在</p>
+<p>（2）临时节点（Ephemeral node）与client保持连接时有效，断联之后，zookeeper会自动删除该节点</p>
+<p>（3）顺序节点（Sequence node）    顺序节点是不能单独存在的；这种类型的节点在创建时，节点路径会自动增加递增序号</p>
+<p><em>由于顺序节点不能单独存在，所以就有了四种节点类型</em></p>
+<h5 id="zookeeper的监控机制"><a href="#zookeeper的监控机制" class="headerlink" title="zookeeper的监控机制"></a>zookeeper的监控机制</h5><p>当父节点的下属节点发生变化，失效节点的父节点主动上报给client，client被动的收到通知。</p>
+<p>监控的三个关键点：</p>
+<p>（1）一次性监控：当监控被触发后，这个监控就失效了，需要重新设置</p>
+<p>（2）保证先收到事件，再收到数据修改的信息</p>
+<p>（3）传递性：触发子节点监控的同时，也会触发父节点的监控</p>
+<p>常用的三个函数：数据发生修改getdata()        子节点发生变化getchildren()        节点失效exits()</p>
+<ul>
+<li>这种方式的监控也有一定的风险</li>
+</ul>
+<p>（1）客户端可能看不到所有的数据变化</p>
+<p>（2）多个事件的监控，可能只会触发一次</p>
+<p>（3）客户端网络中断的时候，有可能无法收到监控的窗口时间</p>
+<h5 id="zookeeper的数据访问"><a href="#zookeeper的数据访问" class="headerlink" title="zookeeper的数据访问"></a>zookeeper的数据访问</h5><p>zookeeper的每个节点上都有一个访问控制链（ACL），用于保存各个客户端对该节点的访问权限。zookeeper用一个三元组来定义客户端的访问权限（scheme:expression:perms）。</p>
+<p>scheme：表示采用哪种机制。有IP、Host、world、digest、auth这5种模式</p>
+<p>expression：表示哪类的用户可以访问。</p>
+<p>perms：表示有哪些权限。有create、read、write、delete、admin</p>
+<h5 id="zookeeper架构"><a href="#zookeeper架构" class="headerlink" title="zookeeper架构"></a>zookeeper架构</h5><p>zookeeper其实也可以看成是主从结构，一共有4个角色：leader、follower、observer、client</p>
+<p>（1）leader负责更新系统的状态，处理事务请求，负责投票的发起和决议</p>
+<p>（2）follower处理客户端的非事务请求，将事务请求转给leader，并在选主过程种参与投票</p>
+<p>（3）observer只同步leader的状态，不参与投票。是为了提高系统的读取速度，专门接收客户端的读请求。</p>
+<p>（4）client是各种操作请求的发起者</p>
+<p>在整个集群中，只有leader能够处理事务请求，leader在处理请求的时候，向整个集群广播一个协议（zab），意思就是，告诉follower，你们要干什么事（创建、修改、删除），当follower接收提议并做出相应操作之后，还要告诉leader，操作成功。</p>
 
       
 
@@ -213,7 +242,29 @@
         
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">big data</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -263,7 +314,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/25/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/20/ZooKeeper/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,15 +328,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/25/自我介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          自我介绍
-        
-      </div>
-    </a>
   
+    <a href="/2019/10/18/Storm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Storm</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -442,11 +489,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Finding Jobs</a>
+                <a href="javascript:void(0)" class="js-tag color3">CV</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CV</a>
+                <a href="javascript:void(0)" class="js-tag color3">Finding Jobs</a>
               </li>
             
             <div class="clearfix"></div>
