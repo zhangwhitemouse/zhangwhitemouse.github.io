@@ -167,65 +167,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-
-<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>当我们对HDFS和Hbase中的表进行查询时，需要手写一段MapReduce代码；但是这样的任务只能由开发人员来完成，耗时又耗力。Hive基于一个统一的查询层，，通过SQL的方式对HDFS上的数据进行查询、统计、分析。Hive并不能存储数据，只是一个计算框架。</p>
-<h5 id="Hive的特点"><a href="#Hive的特点" class="headerlink" title="Hive的特点"></a>Hive的特点</h5><p>（1）Hive是逻辑表，只是表的定义，本质是Hadoop的目录文件，从而实现元数据与数据存储的分离</p>
-<p>（2）Hive适合读多写少的场合</p>
-<p>（3）Hive并没有定义专门的数据格式，由用户自己指定（指定3个属性即可）</p>
-<ul>
-<li>Hive的数据格式</li>
-</ul>
-<p>（1）列分隔符    \n</p>
-<p>（2）行分隔符    \t    \001    空格</p>
-<p>（3）读取文件的方法    Text File(可读性好，数据不压缩，占磁盘空间)    sequenceFile（二进制）    RCFile（Hive专门推出的面向列的数据格式）</p>
-<h3 id="Hive的组件与架构"><a href="#Hive的组件与架构" class="headerlink" title="Hive的组件与架构"></a>Hive的组件与架构</h3><h5 id="3种接入方式"><a href="#3种接入方式" class="headerlink" title="3种接入方式"></a>3种接入方式</h5><p>（1）Client    通过Hive shell的方式，进行数据操作</p>
-<p>（2）JDBC／ODBC    通过Java写代码，调用JDBC的接口，然后做一些类似于HIVe的功能</p>
-<p>（３）webGUI的方式        通过web页面提交一些SQL命令</p>
-<h5 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h5><p>（１）driver    将提交的命令做一个编译，做一些优化，然后生成一些MR程序</p>
-<p>（２）metastore    默认是本地数据库，但是生产环境都是将元数据存放在MYSQL集群中的</p>
-<h5 id="hive的数据模型"><a href="#hive的数据模型" class="headerlink" title="hive的数据模型"></a>hive的数据模型</h5><p>Hive的本质就是Hadoop目录，通常情况下你不改的话叫warehouse。</p>
-<ul>
-<li>Hive中有两种表</li>
-</ul>
-<p>（1）Table  内部表   create table</p>
-<p>（2）External Table  外部表   create external table</p>
-<p><em>Table是一个文件夹，不是一个文件</em></p>
-<ul>
-<li>Hive的内部表与外部表有什么区别呢？</li>
-</ul>
-<p>（1）导入数据</p>
-<p>在导入数据的时候，内部表是将外部数据放到自己的数据仓库下的；而外部表并没有将数据导入到本地数据仓库</p>
-<p>（2）删除表</p>
-<p>在内部表的删除中，表的元数据与数据一起被删除；外部表的删除，删除的只是外部表的元数据</p>
-<ul>
-<li>Partition分区表</li>
-</ul>
-<p>将数据通过属性进行分区。而我们通常选择经常出现在where条件里的字段（只适合分区字段的取值是有限集合）常见的分区字段有：时间、流量类型</p>
-<ul>
-<li>bucket 桶</li>
-</ul>
-<p>bucket可以看成是在Partition的基础上进行二次优化，其根本目的是为了优化查询、方便采样。</p>
-<h5 id="Hive的可拓展性"><a href="#Hive的可拓展性" class="headerlink" title="Hive的可拓展性"></a>Hive的可拓展性</h5><p>不仅支持基本的数据类型，而且还支持复合类型（Arrays、maps、structs）。并且支持函数，如UDF、UDAF、UDTF。这些函数都是用户自定义的。</p>
-<p>（1）UDF    输入一个字段，输出一个字段</p>
-<p>（２）UDAF　输入多个字段，输出一个字段</p>
-<p>（３）UDTF　输入一个字段，输出多个字段</p>
-<h3 id="Hive的优化"><a href="#Hive的优化" class="headerlink" title="Hive的优化"></a>Hive的优化</h3><p>首先Hive的本质就是Map Reduce，所以优化的一个角度与Map Reduce的优化相似。另外一个角度就是来自SQL语句的优化</p>
-<ul>
-<li>MapReduce的优化</li>
-</ul>
-<p>（1）增加并发，调整并发度（通过参数直接设置map的个数）</p>
-<p>（2）增加reduce的个数（通过Mapreduce参数设置）</p>
-<ul>
-<li>sql语句的优化</li>
-</ul>
-<p>（1）对于大量的数据做count这种聚合操作时，增加group by，增加并发</p>
-<p>（2）在两个表做join的时候，一定要增加on条件，不然就是笛卡尔积的形式</p>
-<p>（3）大小表做join，将小表放进内存</p>
-<p>（4）大大表做join的时候，根据实际业务进行处理</p>
-<h5 id="数据倾斜"><a href="#数据倾斜" class="headerlink" title="数据倾斜"></a>数据倾斜</h5><p>当我们对数据进行分桶的时候，会出现有些key后面的记录特别多，有些key 的记录比较小，在进行mapreduce的时候，相同的key的数据，会分配到同一个reduce中进行处理，这样就会造成有些reduce处理完了，有些reduce却要花费很长时间。</p>
-<p>其实HIve还有好多东西，下回再写把</p>
-
+        <p>偷点懒呀。。。</p>
+        
+          <a class="article-more-a" href="/2019/10/22/Hive/#more">more >></a>
+        
       
 
       
@@ -310,48 +255,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-
-<h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><p>zookeeper是一个开源的分布式服务协调组件，它将复杂易错的分布式一致性服务封装起来，提供一系列的接口给用户使用。</p>
-<p>对zookeeper的描述可以用一句话来完成：一个松散耦合的分布式系统、粗粒度锁以及可靠存储低容量的系统</p>
-<p>（1）松散耦合：对硬件要求不高</p>
-<p>（2）粗粒度锁：单机系统中的进程锁是非常细的，而分布式系统中锁，只需要保证每台机器按规则协调工作即可</p>
-<p>（3）可靠存储：zookeeper的节点是能够存储少量信息的</p>
-<h5 id="zookeeper的特性"><a href="#zookeeper的特性" class="headerlink" title="zookeeper的特性"></a>zookeeper的特性</h5><p>（1）客户端更新顺序与它们的发送顺序一致</p>
-<p>（2）原子性操作：要么操作全部成功，要么全部失败</p>
-<p>（3）单一视图：无论哪个客户端连接上来，看到的视图应该都是一样的</p>
-<p>（4）实时性：一段时间内，系统的任何变更，客户端都能检测到</p>
-<h5 id="zookeeper的数据模型和节点类型"><a href="#zookeeper的数据模型和节点类型" class="headerlink" title="zookeeper的数据模型和节点类型"></a>zookeeper的数据模型和节点类型</h5><p>zookeeper的数据模型与Linux的文件目录树是一致的，但是zookeeper只有绝对路径，没有相对路径。zookeeper中每一个节点（znode）都存储自身的信息，包括数据，数据长度，创建时间，修改时间。</p>
-<ul>
-<li>zookeeper的节点有三种属性，构成了4种节点：</li>
-</ul>
-<p>（1）永久节点（Persistent node）永久有效的节点，除非client显示删除，否则一直存在</p>
-<p>（2）临时节点（Ephemeral node）与client保持连接时有效，断联之后，zookeeper会自动删除该节点</p>
-<p>（3）顺序节点（Sequence node）    顺序节点是不能单独存在的；这种类型的节点在创建时，节点路径会自动增加递增序号</p>
-<p><em>由于顺序节点不能单独存在，所以就有了四种节点类型</em></p>
-<h5 id="zookeeper的监控机制"><a href="#zookeeper的监控机制" class="headerlink" title="zookeeper的监控机制"></a>zookeeper的监控机制</h5><p>当父节点的下属节点发生变化，失效节点的父节点主动上报给client，client被动的收到通知。</p>
-<p>监控的三个关键点：</p>
-<p>（1）一次性监控：当监控被触发后，这个监控就失效了，需要重新设置</p>
-<p>（2）保证先收到事件，再收到数据修改的信息</p>
-<p>（3）传递性：触发子节点监控的同时，也会触发父节点的监控</p>
-<p>常用的三个函数：数据发生修改getdata()        子节点发生变化getchildren()        节点失效exits()</p>
-<ul>
-<li>这种方式的监控也有一定的风险</li>
-</ul>
-<p>（1）客户端可能看不到所有的数据变化</p>
-<p>（2）多个事件的监控，可能只会触发一次</p>
-<p>（3）客户端网络中断的时候，有可能无法收到监控的窗口时间</p>
-<h5 id="zookeeper的数据访问"><a href="#zookeeper的数据访问" class="headerlink" title="zookeeper的数据访问"></a>zookeeper的数据访问</h5><p>zookeeper的每个节点上都有一个访问控制链（ACL），用于保存各个客户端对该节点的访问权限。zookeeper用一个三元组来定义客户端的访问权限（scheme:expression:perms）。</p>
-<p>scheme：表示采用哪种机制。有IP、Host、world、digest、auth这5种模式</p>
-<p>expression：表示哪类的用户可以访问。</p>
-<p>perms：表示有哪些权限。有create、read、write、delete、admin</p>
-<h5 id="zookeeper架构"><a href="#zookeeper架构" class="headerlink" title="zookeeper架构"></a>zookeeper架构</h5><p>zookeeper其实也可以看成是主从结构，一共有4个角色：leader、follower、observer、client</p>
-<p>（1）leader负责更新系统的状态，处理事务请求，负责投票的发起和决议</p>
-<p>（2）follower处理客户端的非事务请求，将事务请求转给leader，并在选主过程种参与投票</p>
-<p>（3）observer只同步leader的状态，不参与投票。是为了提高系统的读取速度，专门接收客户端的读请求。</p>
-<p>（4）client是各种操作请求的发起者</p>
-<p>在整个集群中，只有leader能够处理事务请求，leader在处理请求的时候，向整个集群广播一个协议（zab），意思就是，告诉follower，你们要干什么事（创建、修改、删除），当follower接收提议并做出相应操作之后，还要告诉leader，操作成功。</p>
-
+        <p>偷点懒呀。。。</p>
+        
+          <a class="article-more-a" href="/2019/10/20/ZooKeeper/#more">more >></a>
+        
       
 
       
