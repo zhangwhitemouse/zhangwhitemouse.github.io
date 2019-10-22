@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 随笔 | white mouse的博客</title>
+  <title>Hive | white mouse的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魔都渣硕一枚">
-<meta property="og:type" content="website">
-<meta property="og:title" content="white mouse的博客">
-<meta property="og:url" content="http://yoursite.com/tags/随笔/index.html">
+  <meta name="description" content="Hive当我们对HDFS和Hbase中的表进行查询时，需要手写一段MapReduce代码；但是这样的任务只能由开发人员来完成，耗时又耗力。Hive基于一个统一的查询层，，通过SQL的方式对HDFS上的数据进行查询、统计、分析。Hive并不能存储数据，只是一个计算框架。 Hive的特点（1）Hive是逻辑表，只是表的定义，本质是Hadoop的目录文件，从而实现元数据与数据存储的分离 （2）Hiv">
+<meta name="keywords" content="big data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive">
+<meta property="og:url" content="http://yoursite.com/2019/10/22/Hive/index.html">
 <meta property="og:site_name" content="white mouse的博客">
-<meta property="og:description" content="魔都渣硕一枚">
+<meta property="og:description" content="Hive当我们对HDFS和Hbase中的表进行查询时，需要手写一段MapReduce代码；但是这样的任务只能由开发人员来完成，耗时又耗力。Hive基于一个统一的查询层，，通过SQL的方式对HDFS上的数据进行查询、统计、分析。Hive并不能存储数据，只是一个计算框架。 Hive的特点（1）Hive是逻辑表，只是表的定义，本质是Hadoop的目录文件，从而实现元数据与数据存储的分离 （2）Hiv">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-22T11:58:02.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="white mouse的博客">
-<meta name="twitter:description" content="魔都渣硕一枚">
+<meta name="twitter:title" content="Hive">
+<meta name="twitter:description" content="Hive当我们对HDFS和Hbase中的表进行查询时，需要手写一段MapReduce代码；但是这样的任务只能由开发人员来完成，耗时又耗力。Hive基于一个统一的查询层，，通过SQL的方式对HDFS上的数据进行查询、统计、分析。Hive并不能存储数据，只是一个计算框架。 Hive的特点（1）Hive是逻辑表，只是表的定义，本质是Hadoop的目录文件，从而实现元数据与数据存储的分离 （2）Hiv">
   
     <link rel="alternative" href="/atom.xml" title="white mouse的博客" type="application/atom+xml">
   
@@ -145,120 +147,240 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Hive" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/26/博客解密/" class="archive-article-date">
-  	<time datetime="2019-08-26T05:05:23.919Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/26/博客解密/">博客解密</a>
+    <h1 class="article-title" itemprop="name">
+      Hive
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/22/Hive/" class="archive-article-date">
+  	<time datetime="2019-10-22T11:58:26.865Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+
+<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>当我们对HDFS和Hbase中的表进行查询时，需要手写一段MapReduce代码；但是这样的任务只能由开发人员来完成，耗时又耗力。Hive基于一个统一的查询层，，通过SQL的方式对HDFS上的数据进行查询、统计、分析。Hive并不能存储数据，只是一个计算框架。</p>
+<h5 id="Hive的特点"><a href="#Hive的特点" class="headerlink" title="Hive的特点"></a>Hive的特点</h5><p>（1）Hive是逻辑表，只是表的定义，本质是Hadoop的目录文件，从而实现元数据与数据存储的分离</p>
+<p>（2）Hive适合读多写少的场合</p>
+<p>（3）Hive并没有定义专门的数据格式，由用户自己指定（指定3个属性即可）</p>
+<ul>
+<li>Hive的数据格式</li>
+</ul>
+<p>（1）列分隔符    \n</p>
+<p>（2）行分隔符    \t    \001    空格</p>
+<p>（3）读取文件的方法    Text File(可读性好，数据不压缩，占磁盘空间)    sequenceFile（二进制）    RCFile（Hive专门推出的面向列的数据格式）</p>
+<h3 id="Hive的组件与架构"><a href="#Hive的组件与架构" class="headerlink" title="Hive的组件与架构"></a>Hive的组件与架构</h3><h5 id="3种接入方式"><a href="#3种接入方式" class="headerlink" title="3种接入方式"></a>3种接入方式</h5><p>（1）Client    通过Hive shell的方式，进行数据操作</p>
+<p>（2）JDBC／ODBC    通过Java写代码，调用JDBC的接口，然后做一些类似于HIVe的功能</p>
+<p>（３）webGUI的方式        通过web页面提交一些SQL命令</p>
+<h5 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h5><p>（１）driver    将提交的命令做一个编译，做一些优化，然后生成一些MR程序</p>
+<p>（２）metastore    默认是本地数据库，但是生产环境都是将元数据存放在MYSQL集群中的</p>
+<h5 id="hive的数据模型"><a href="#hive的数据模型" class="headerlink" title="hive的数据模型"></a>hive的数据模型</h5><p>Hive的本质就是Hadoop目录，通常情况下你不改的话叫warehouse。</p>
+<ul>
+<li>Hive中有两种表</li>
+</ul>
+<p>（1）Table  内部表   create table</p>
+<p>（2）External Table  外部表   create external table</p>
+<p><em>Table是一个文件夹，不是一个文件</em></p>
+<ul>
+<li>Hive的内部表与外部表有什么区别呢？</li>
+</ul>
+<p>（1）导入数据</p>
+<p>在导入数据的时候，内部表是将外部数据放到自己的数据仓库下的；而外部表并没有将数据导入到本地数据仓库</p>
+<p>（2）删除表</p>
+<p>在内部表的删除中，表的元数据与数据一起被删除；外部表的删除，删除的只是外部表的元数据</p>
+<ul>
+<li>Partition分区表</li>
+</ul>
+<p>将数据通过属性进行分区。而我们通常选择经常出现在where条件里的字段（只适合分区字段的取值是有限集合）常见的分区字段有：时间、流量类型</p>
+<ul>
+<li>bucket 桶</li>
+</ul>
+<p>bucket可以看成是在Partition的基础上进行二次优化，其根本目的是为了优化查询、方便采样。</p>
+<h5 id="Hive的可拓展性"><a href="#Hive的可拓展性" class="headerlink" title="Hive的可拓展性"></a>Hive的可拓展性</h5><p>不仅支持基本的数据类型，而且还支持复合类型（Arrays、maps、structs）。并且支持函数，如UDF、UDAF、UDTF。这些函数都是用户自定义的。</p>
+<p>（1）UDF    输入一个字段，输出一个字段</p>
+<p>（２）UDAF　输入多个字段，输出一个字段</p>
+<p>（３）UDTF　输入一个字段，输出多个字段</p>
+<h3 id="Hive的优化"><a href="#Hive的优化" class="headerlink" title="Hive的优化"></a>Hive的优化</h3><p>首先Hive的本质就是Map Reduce，所以优化的一个角度与Map Reduce的优化相似。另外一个角度就是来自SQL语句的优化</p>
+<ul>
+<li>MapReduce的优化</li>
+</ul>
+<p>（1）增加并发，调整并发度（通过参数直接设置map的个数）</p>
+<p>（2）增加reduce的个数（通过Mapreduce参数设置）</p>
+<ul>
+<li>sql语句的优化</li>
+</ul>
+<p>（1）对于大量的数据做count这种聚合操作时，增加group by，增加并发</p>
+<p>（2）在两个表做join的时候，一定要增加on条件，不然就是笛卡尔积的形式</p>
+<p>（3）大小表做join，将小表放进内存</p>
+<p>（4）大大表做join的时候，根据实际业务进行处理</p>
+<h5 id="数据倾斜"><a href="#数据倾斜" class="headerlink" title="数据倾斜"></a>数据倾斜</h5><p>当我们对数据进行分桶的时候，会出现有些key后面的记录特别多，有些key 的记录比较小，在进行mapreduce的时候，相同的key的数据，会分配到同一个reduce中进行处理，这样就会造成有些reduce处理完了，有些reduce却要花费很长时间。</p>
+<p>其实HIve还有好多东西，下回再写把</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+        
+          <span id="busuanzi_container_page_pv">
+            ⋉(●本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次●)⋊
+          </span>
+        
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">big data</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/22/Hive/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/自我介绍/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:37:23.434Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/20/ZooKeeper/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">zookeeper</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/自我介绍/">自我介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -285,9 +407,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
